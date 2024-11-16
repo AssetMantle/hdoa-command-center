@@ -1,0 +1,7 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+// Msg defines the Msg service.
+service Msg {}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+import "gogoproto/gogo.proto";
+import "hdoacommandcenter/hdoacommandcenter/params.proto";
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+// GenesisState defines the hdoacommandcenter module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

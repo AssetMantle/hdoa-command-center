@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
