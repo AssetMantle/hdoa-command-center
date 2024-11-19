@@ -18,28 +18,28 @@ export default function Dashboard() {
       <div className="left col-start-1 col-span-2 row-start-1 row-span-8 flex flex-col gap-4 p-4">
         <div className="title uppercase text-center">Commerce</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdAutoGraph />
           </span>
           <span className="text-center uppercase font-medium">Buy</span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaHandHoldingUsd />
           </span>
           <span className="text-center uppercase font-medium">Sell</span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <PiHandshakeBold />
           </span>
           <span className="text-center uppercase font-medium">Trade</span>
         </div>
       </div>
-      <div className="top col-start-3 col-span-10 row-start-1 row-span-4 flex flex-wrap items-center justify-evenly gap-4 p-4">
+      <div className="top col-start-3 col-span-10 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4">
         <div className="title uppercase text-center  w-full">Governance</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdOutlineCamera />
           </span>
           <span className="text-center uppercase font-medium">
@@ -49,7 +49,7 @@ export default function Dashboard() {
           </span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiBuildingLibrary />
           </span>
           <span className="text-center uppercase font-medium">
@@ -59,7 +59,7 @@ export default function Dashboard() {
           </span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiOutlineBuildingLibrary />
           </span>
           <span className="text-center uppercase font-medium">
@@ -69,7 +69,7 @@ export default function Dashboard() {
           </span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaBuildingColumns />
           </span>
           <span className="text-center uppercase font-medium">
@@ -79,7 +79,7 @@ export default function Dashboard() {
           </span>
         </div>
       </div>
-      <div className="center col-start-3 col-span-6 row-start-5 row-span-5 flex items-center gap-4 p-4">
+      <div className="center col-start-3 col-span-8 row-start-3 row-span-4 flex items-center gap-4 p-4">
         <textarea
           className="border-2 rounded-4 px-2 py-1 h-full flex-1 resize-none"
           value={Left}
@@ -88,7 +88,7 @@ export default function Dashboard() {
           required
         />
         <div className="button flex-1 flex flex-col items-center justify-center gap-1">
-          <span className="text-5xl">
+          <span className="text-5xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
           </span>
           <span className="text-center uppercase font-medium">
@@ -105,85 +105,87 @@ export default function Dashboard() {
           required
         />
       </div>
-      <div className="right col-start-9 col-span-4 row-start-5 row-span-8 grid grid-cols-2 gap-4 p-4">
-        <div className="title uppercase text-center col-span-2">Domains</div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <FaStethoscope />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Doc
-            <br />
-            Pathway
-          </span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <GiPathDistance />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Path
-            <br />
-            Modelling
-          </span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <FaUserDoctor />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Nurse
-            <br />
-            Pathway
-          </span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <GiSyringe />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Resource
-            <br />
-            Tracing
-          </span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <GiMedicinePills />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Pharma
-            <br />
-            Pathway
-          </span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
-            <RiAdminFill />
-          </span>
-          <span className="text-center uppercase font-medium">
-            Admin
-            <br />
-            Pathway
-          </span>
+      <div className="right col-start-11 col-span-2 row-start-3 row-span-6 flex flex-col gap-4 p-4">
+        <div className="title uppercase text-center col-span-1">Domains</div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <FaStethoscope />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Doc
+              <br />
+              Pathway
+            </span>
+          </div>
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <GiPathDistance />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Path
+              <br />
+              Modelling
+            </span>
+          </div>
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <FaUserDoctor />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Nurse
+              <br />
+              Pathway
+            </span>
+          </div>
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <GiSyringe />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Resource
+              <br />
+              Tracing
+            </span>
+          </div>
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <GiMedicinePills />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Pharma
+              <br />
+              Pathway
+            </span>
+          </div>
+          <div className="icons flex flex-col items-center justify-center gap-1">
+            <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+              <RiAdminFill />
+            </span>
+            <span className="text-center uppercase font-medium">
+              Admin
+              <br />
+              Pathway
+            </span>
+          </div>
         </div>
       </div>
-      <div className="bottom col-start-1 col-span-8 row-start-10 row-span-3 flex flex-wrap items-center justify-evenly gap-4 p-4">
+      <div className="bottom col-start-1 col-span-8 row-start-7 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4">
         <div className="title uppercase text-center  w-full">Compliance</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <ImHammer2 />
           </span>
           <span className="text-center uppercase font-medium">Hipaa Oversight</span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserTie />
           </span>
           <span className="text-center uppercase font-medium">Gov Oversight</span>
         </div>
         <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserShield />
           </span>
           <span className="text-center uppercase font-medium">DataSec Compliance</span>
