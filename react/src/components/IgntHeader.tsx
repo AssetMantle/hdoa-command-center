@@ -18,7 +18,7 @@ export default function IgntHeader(props: IgntHeaderProps) {
   };
 
   return (
-    <header className="flex justify-center p-5 am-bg-translucent">
+    <header className="flex justify-center p-5 am-bg-translucent sticky top-0 z-[100]">
       <IgntLogo className="mx-2.5" />
       <nav className="flex justify-between gap-3">
         <ul className="flex items-center">

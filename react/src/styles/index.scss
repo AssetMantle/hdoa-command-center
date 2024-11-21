@@ -39,3 +39,12 @@ body {
     }
   }
 }
+
+.sp-acc {
+  & > div {
+    &.fixed {
+      height: 100dvh;
+      // z-index: 200;
+    }
+  }
+}
