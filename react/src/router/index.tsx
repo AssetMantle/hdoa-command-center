@@ -1,8 +1,8 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import IgntHeader from "../components/IgntHeader";
-import DataView from "../views/DataView";
-import PortfolioView from "../views/PortfolioView";
+// import DataView from "../views/DataView";
+// import PortfolioView from "../views/PortfolioView";
 import Dashboard from "../views/Dashboard";
 
 const items = [
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <Dashboard /> },
-      // { path: "/data", element: <DataView /> },
+      { path: "/data", element: <Dashboard /> },
     ],
   },
 ]);
