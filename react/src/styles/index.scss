@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+  -webkit-appearance: none;
+}
+
+body {
+  background-image: radial-gradient(circle, rgba(163, 217, 207, 1) 0%, rgba(4, 178, 217, 1) 68%);
+}
+
+.am {
+  &-bg {
+    &-translucent {
+      background-color: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
+      &-blue {
+        // background: rgba(148, 241, 246, 0.25);
+        background-color: transparent;
+        background-image: linear-gradient(0deg, rgba(148, 241, 246, 0.45) 0%, rgba(255, 255, 255, 0.45) 30%);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        // border-radius: 10px;
+        // border: 1px solid rgba(255, 255, 255, 0.18);
+        &-sm {
+          background-color: transparent;
+          background-image: linear-gradient(0deg, rgba(148, 241, 246, 0.25) 0%, rgba(255, 255, 255, 0.25) 50%);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+          backdrop-filter: blur(4px);
+          //   mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 90%, transparent);
+        }
+      }
+    }
+  }
+}
