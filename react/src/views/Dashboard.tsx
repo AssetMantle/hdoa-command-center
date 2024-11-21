@@ -14,9 +14,9 @@ export default function Dashboard() {
   const [Left, setLeft] = useState("");
   const [Right, setRight] = useState("");
   return (
-    <main className="container m-auto grid grid-cols-12 grid-rows-12 gap-2">
-      <div className="left col-start-1 col-span-2 row-start-1 row-span-8 flex flex-col gap-4 p-4">
-        <div className="title uppercase text-center">Commerce</div>
+    <main className="container m-auto my-4 grid grid-cols-12 grid-rows-9 gap-4">
+      <div className="left col-start-1 col-span-2 row-start-3 row-span-5 flex flex-col items-center justify-center gap-4 p-4 am-bg-translucent rounded-2xl">
+        <div className="title uppercase text-center text-xl">Commerce</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdAutoGraph />
@@ -36,9 +36,9 @@ export default function Dashboard() {
           <span className="text-center uppercase font-medium">Trade</span>
         </div>
       </div>
-      <div className="top col-start-3 col-span-10 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4">
-        <div className="title uppercase text-center  w-full">Governance</div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
+        <div className="title uppercase text-center text-xl  w-full">Governance</div>
+        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdOutlineCamera />
           </span>
@@ -48,7 +48,7 @@ export default function Dashboard() {
             GOVERNANCE
           </span>
         </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiBuildingLibrary />
           </span>
@@ -58,7 +58,7 @@ export default function Dashboard() {
             GOVERNANCE
           </span>
         </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiOutlineBuildingLibrary />
           </span>
@@ -68,7 +68,7 @@ export default function Dashboard() {
             GOVERNANCE
           </span>
         </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaBuildingColumns />
           </span>
@@ -79,16 +79,16 @@ export default function Dashboard() {
           </span>
         </div>
       </div>
-      <div className="center col-start-3 col-span-8 row-start-3 row-span-4 flex items-center gap-4 p-4">
+      <div className="center col-start-3 col-span-8 row-start-3 row-span-5 flex items-center gap-4 p-4">
         <textarea
-          className="border-2 rounded-4 px-2 py-1 h-full flex-1 resize-none"
+          className="border-0 rounded-2xl px-2 py-1 h-full flex-1 resize-none am-bg-translucent-blue"
           value={Left}
           onChange={(e) => setLeft(e.target.value)}
           placeholder=""
           required
         />
         <div className="button flex-1 flex flex-col items-center justify-center gap-1">
-          <span className="text-5xl rounded-[50%] border-4 border-black p-4">
+          <span className="text-8xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
           </span>
           <span className="text-center uppercase font-medium">
@@ -98,15 +98,15 @@ export default function Dashboard() {
           </span>
         </div>
         <textarea
-          className="border-2 rounded-4 px-2 py-1 h-full flex-1 resize-none"
+          className="border-0 rounded-2xl px-2 py-1 h-full flex-1 resize-none am-bg-translucent-blue"
           value={Right}
           onChange={(e) => setRight(e.target.value)}
           placeholder=""
           required
         />
       </div>
-      <div className="right col-start-11 col-span-2 row-start-3 row-span-6 flex flex-col gap-4 p-4">
-        <div className="title uppercase text-center col-span-1">Domains</div>
+      <div className="right col-start-11 col-span-2 row-start-3 row-span-5 flex flex-col gap-4 p-4 am-bg-translucent rounded-2xl">
+        <div className="title uppercase text-center text-xl col-span-1">Domains</div>
         <div className="grid grid-cols-2 gap-4">
           <div className="icons flex flex-col items-center justify-center gap-1">
             <span className="text-4xl rounded-[50%] border-4 border-black p-3">
@@ -170,21 +170,21 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="bottom col-start-1 col-span-8 row-start-7 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4">
-        <div className="title uppercase text-center  w-full">Compliance</div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+      <div className="bottom col-start-1 col-span-12 row-start-8 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
+        <div className="title uppercase text-center text-xl  w-full">Compliance</div>
+        <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <ImHammer2 />
           </span>
           <span className="text-center uppercase font-medium">Hipaa Oversight</span>
         </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+        <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserTie />
           </span>
           <span className="text-center uppercase font-medium">Gov Oversight</span>
         </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
+        <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserShield />
           </span>
