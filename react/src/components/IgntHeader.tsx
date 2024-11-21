@@ -1,5 +1,6 @@
 import { IgntLink, IgntLogo } from "@ignt/react-library";
 import IgntAcc from "./IgntAcc";
+import { IoReloadCircle } from "react-icons/io5";
 
 type MenuItem = {
   label: string;
@@ -12,10 +13,14 @@ interface IgntHeaderProps {
 export default function IgntHeader(props: IgntHeaderProps) {
   const { navItems } = props;
 
+  const updateState = () => {
+    return null;
+  };
+
   return (
-    <header className="flex p-5">
+    <header className="flex justify-center p-5 am-bg-translucent">
       <IgntLogo className="mx-2.5" />
-      <nav className="flex flex-1 justify-between">
+      <nav className="flex justify-between gap-3">
         <ul className="flex items-center">
           {navItems.map((item) => (
             <li className="text-3 px-4 font-normal" key={item.label}>
@@ -24,6 +29,11 @@ export default function IgntHeader(props: IgntHeaderProps) {
           ))}
         </ul>
 
+        <div className="flex items-center">
+          <button className="am-esg-reload text-[2rem]" onClick={updateState}>
+            <IoReloadCircle />
+          </button>
+        </div>
         <div>
           <IgntAcc />
         </div>
