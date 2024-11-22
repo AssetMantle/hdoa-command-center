@@ -35,9 +35,6 @@ export default function Dashboard() {
           </span>
           <span className="text-center uppercase font-medium">Trade</span>
         </div>
-      </div>
-      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
-        <div className="title uppercase text-center text-xl  w-full">Governance</div>
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdOutlineCamera />
@@ -48,6 +45,9 @@ export default function Dashboard() {
             GOVERNANCE
           </span>
         </div>
+      </div>
+      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
+        <div className="title uppercase text-center text-xl  w-full">Governance</div>
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiBuildingLibrary />
