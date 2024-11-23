@@ -10,6 +10,7 @@
   --am-esg-gray: #5f5d5a;
   --am-esg-black: #111111;
   --am-esg-green: #09cb7a;
+  --am-esg-cyan: #a3d9cf;
   --am-esg-blue: #0d2e6e;
   --am-esg-blue-2: #01338e;
   --am-esg-blue-light: #1373e6;
@@ -26,7 +27,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 body {
-  background-image: radial-gradient(circle, rgba(163, 217, 207, 1) 0%, rgba(4, 178, 217, 1) 68%);
+  background-image: radial-gradient(circle, #a3d9cf 0%, rgba(4, 178, 217, 1) 68%);
 }
 
 .am {
@@ -54,6 +55,14 @@ body {
   }
 }
 .am-esg {
+  &-bg {
+    &-green {
+      background-color: var(--am-esg-green);
+    }
+    &-cyan {
+      background-color: var(--am-esg-cyan);
+    }
+  }
   &-color {
     &-blue {
       color: var(--am-esg-blue);
