@@ -8,6 +8,32 @@ accounts:
   coins:
   - 10000token
   - 100000000stake
+- name: p1
+  coins:
+  - 20000token
+  - 200000000stake
+  mnemonic: canal pipe license style master below advance repeat busy buyer chase model
+- name: p2
+  coins:
+  - 10000token
+  - 250000000stake
+  mnemonic: sunset vault attract friend zero lazy rib hockey rice emotion party visual
+- name: p3
+  coins:
+  - 10000token
+  - 250000000stake
+  mnemonic: height mechanic crush exit exit position giggle friend critic master erode there
+- name: p4
+  coins:
+  - 10000token
+  - 250000000stake
+  mnemonic: orphan loan vendor damp hope mix spread jazz cube often sorry face
+- name: p5
+  coins:
+  - 10000token
+  - 250000000stake
+  mnemonic: vessel dial fun hour easily logic index round sadness assist process grit
+  
 faucet:
   name: bob
   coins:
