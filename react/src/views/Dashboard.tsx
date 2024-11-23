@@ -9,11 +9,11 @@ import { ImHammer2 } from "react-icons/im";
 import { MdAutoGraph, MdOutlineCamera } from "react-icons/md";
 import { PiHandshakeBold } from "react-icons/pi";
 import { RiAdminFill } from "react-icons/ri";
-import { useClient } from "../hooks/useClient";
+import { useAddressContext } from "../def-hooks/addressContext";
 import { useResetState } from "../def-hooks/ResetStateContext";
+import { useClient } from "../hooks/useClient";
 import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
 import { hookOptions, perPage } from "../utils/library";
-import { useAddressContext } from "../def-hooks/addressContext";
 
 export default function Dashboard() {
   const [Left, setLeft] = useState("");
@@ -23,26 +23,67 @@ export default function Dashboard() {
   const creatorAddressObject = useAddressContext();
 
   const { resetState: latestIndexes } = useResetState();
-  const { QueryDomainAll, QueryDomain } = useHdoacommandcenterHdoacommandcenter();
+  const { QueryDomainAll, QueryCommerceAll, QueryComplianceAll, QueryGovernanceAll } =
+    useHdoacommandcenterHdoacommandcenter();
+  // DOMAIN VALUES
   const domainAll = QueryDomainAll(
     { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
     hookOptions,
     perPage,
   );
-
   const domainLatestIndex = isNaN(Number(latestIndexes[2])) ? 0 : Number(latestIndexes[2]);
   const domainLatestValue = domainAll?.data?.pages?.[0]?.Domain?.[domainLatestIndex] || {};
-  const domainNewValue = {
+  const domainInitValue = {
     adminPathway: domainLatestValue?.adminPathway || false,
     docPathway: domainLatestValue?.docPathway || false,
     nursePathway: domainLatestValue?.nursePathway || false,
     resourceTracing: domainLatestValue?.resourceTracing || false,
     pharmaPathway: domainLatestValue?.pharmaPathway || false,
-    pathModelling: true,
+    pathModelling: domainLatestValue?.pathModelling || false,
+  };
+  // COMMERCE VALUES
+  const commerceAll = QueryCommerceAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const commerceLatestIndex = isNaN(Number(latestIndexes[0])) ? 0 : Number(latestIndexes[0]);
+  const commerceLatestValue = commerceAll?.data?.pages?.[0]?.Commerce?.[commerceLatestIndex] || {};
+  const commerceInitValue = {
+    access: commerceLatestValue?.access || false,
+    fractionalize: commerceLatestValue?.fractionalize || false,
+    sell: commerceLatestValue?.sell || false,
+  };
+  // GOVERNANCE VALUES
+  const governanceAll = QueryGovernanceAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const governanceLatestIndex = isNaN(Number(latestIndexes[3])) ? 0 : Number(latestIndexes[3]);
+  const governanceLatestValue = governanceAll?.data?.pages?.[0]?.Governance?.[governanceLatestIndex] || {};
+  const governanceInitValue = {
+    commerceGov: governanceLatestValue?.commerceGov || false,
+    complianceGov: governanceLatestValue?.complianceGov || false,
+    healthcareGov: governanceLatestValue?.healthcareGov || false,
+  };
+  // COMPLIANCE VALUES
+  const complianceAll = QueryComplianceAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const complianceLatestIndex = isNaN(Number(latestIndexes[1])) ? 0 : Number(latestIndexes[1]);
+  const complianceLatestValue = complianceAll?.data?.pages?.[0]?.Compliance?.[complianceLatestIndex] || {};
+  const complianceInitValue = {
+    dataSecCompliance: complianceLatestValue?.dataSecCompliance || false,
+    govOversight: complianceLatestValue?.govOversight || false,
+    hipaaOversight: complianceLatestValue?.hipaaOversight || false,
   };
 
   const handlePathModelling = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault(); // Prevent default form submission
+    const domainNewValue = { ...domainInitValue, pathModelling: true };
 
     // create transaction to create raw material data
     try {
@@ -50,12 +91,7 @@ export default function Dashboard() {
         value: {
           creator: creatorAddressObject?.address,
           id: domainLatestIndex,
-          adminPathway: domainNewValue?.adminPathway || false,
-          docPathway: domainNewValue?.docPathway || false,
-          nursePathway: domainNewValue?.nursePathway || false,
-          pathModelling: domainNewValue?.pathModelling || false,
-          pharmaPathway: domainNewValue?.pharmaPathway || false,
-          resourceTracing: domainNewValue?.resourceTracing || false,
+          ...domainNewValue,
         },
         fee: {
           amount: [{ amount: "0", denom: "stake" }],
@@ -69,11 +105,154 @@ export default function Dashboard() {
     }
   };
 
-  console.log("domainValue: ", domainAll, " domainNewValue: ", domainNewValue, " latestIndexes: ", latestIndexes);
+  const handleFractionalize = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault(); // Prevent default form submission
+    const commerceNewValue = { ...commerceInitValue, fractionalize: true };
+
+    // create transaction to create raw material data
+    try {
+      const tx_result = await lcaClient.HdoacommandcenterHdoacommandcenter.tx.sendMsgUpdateCommerce({
+        value: {
+          creator: creatorAddressObject?.address,
+          id: commerceLatestIndex,
+          ...commerceNewValue,
+        },
+        fee: {
+          amount: [{ amount: "0", denom: "stake" }],
+          gas: "200000",
+        },
+        memo: "",
+      });
+      alert("Transaction Submitted. Wait for confirmation");
+    } catch (error) {
+      console.error("Error during handle submit: ", error);
+    }
+  };
+
+  const handleCommerceGov = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault(); // Prevent default form submission
+    const governanceNewVal = { ...governanceInitValue, commerceGov: true };
+
+    // create transaction to create raw material data
+    try {
+      const tx_result = await lcaClient.HdoacommandcenterHdoacommandcenter.tx.sendMsgUpdateGovernance({
+        value: {
+          creator: creatorAddressObject?.address,
+          id: domainLatestIndex,
+          ...governanceNewVal,
+        },
+        fee: {
+          amount: [{ amount: "0", denom: "stake" }],
+          gas: "200000",
+        },
+        memo: "",
+      });
+      alert("Transaction Submitted. Wait for confirmation");
+    } catch (error) {
+      console.error("Error during handle submit: ", error);
+    }
+  };
+
+  const handleHipaaOversight = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault(); // Prevent default form submission
+    const complianceNewVal = { ...complianceInitValue, hipaaOversight: true };
+
+    // create transaction to create raw material data
+    try {
+      const tx_result = await lcaClient.HdoacommandcenterHdoacommandcenter.tx.sendMsgUpdateCompliance({
+        value: {
+          creator: creatorAddressObject?.address,
+          id: domainLatestIndex,
+          ...complianceNewVal,
+        },
+        fee: {
+          amount: [{ amount: "0", denom: "stake" }],
+          gas: "200000",
+        },
+        memo: "",
+      });
+      alert("Transaction Submitted. Wait for confirmation");
+    } catch (error) {
+      console.error("Error during handle submit: ", error);
+    }
+  };
+
+  const commerceJSX = !commerceInitValue?.fractionalize ? (
+    <>
+      <h3 className="text-xl mb-3">Asset Price: $564k</h3>
+      <h4 className="text-lg mb-2">Share Owners:</h4>
+      <p className="text-sm">
+        0xaecdoo: <strong>1</strong>
+      </p>
+      <p className="text-sm">
+        0xaecdba: <strong>0</strong>
+      </p>
+      <p className="text-sm">
+        0xcd3223: <strong>0</strong>
+      </p>
+      <p className="text-sm">
+        Fractions: <strong>1</strong>
+      </p>
+    </>
+  ) : (
+    <>
+      <h3 className="text-xl mb-3">Asset Price: $849k</h3>
+      <h4 className="text-lg mb-2">Share Owners:</h4>
+      <p className="text-sm">
+        0xaecdoo: <strong>40%</strong>
+      </p>
+      <p className="text-sm">
+        0xaecdba: <strong>30%</strong>
+      </p>
+      <p className="text-sm">
+        0xcd3223: <strong>30%</strong>
+      </p>
+      <p className="text-sm">
+        Fractions: <strong>100</strong>
+      </p>
+    </>
+  );
+
+  const governanceJSX = !governanceInitValue?.commerceGov ? (
+    <>
+      <h3 className="text-xl mb-3">Asset Price: DISABLED</h3>
+      <h4 className="text-lg mb-2">Share Owners:</h4>
+      <p className="text-sm">
+        0xaecdoo: <strong>DISABLED</strong>
+      </p>
+      <p className="text-sm">
+        0xaecdba: <strong>DISABLED</strong>
+      </p>
+      <p className="text-sm">
+        0xcd3223: <strong>DISABLED</strong>
+      </p>
+      <p className="text-sm">
+        Fractions: <strong>DISABLED</strong>
+      </p>
+    </>
+  ) : (
+    commerceJSX
+  );
+
+  const hipaaJSX = complianceInitValue?.hipaaOversight ? (
+    <>
+      <h3 className="text-xl mb-3">HIPAA Compliant: TRUE</h3>
+      <h4 className="text-lg mb-2">HIPAA Cert. ID: HIPAA-CERT-2024-XYZ123</h4>
+      <h4 className="text-lg mb-2">HIPAA Validity: 2028-12-31</h4>
+    </>
+  ) : (
+    <>
+      <h3 className="text-xl mb-3">HIPAA Compliant: FALSE</h3>
+      <h4 className="text-lg mb-2">HIPAA Cert. ID: -NA-</h4>
+      <h4 className="text-lg mb-2">HIPAA Validity: -NA-</h4>
+    </>
+  );
+
+  console.log("domainValue: ", domainAll, " domainNewValue: ", domainInitValue, " latestIndexes: ", latestIndexes);
 
   return (
     <main className="container m-auto my-4 grid grid-cols-12 grid-rows-9 gap-4">
-      <div className="left col-start-1 col-span-2 row-start-3 row-span-5 flex flex-col items-center justify-center gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
+      <div className="left col-start-1 col-span-2 row-start-3 row-span-5 flex flex-col items-center justify-center gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-gray">
         <div className="title uppercase text-center text-xl">Commerce</div>
 
         <div className="icons flex flex-col items-center justify-center gap-1">
@@ -97,14 +276,17 @@ export default function Dashboard() {
           <span className="text-center uppercase font-medium">Access</span>
         </div>
 
-        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
+        <button
+          className="icons flex flex-col items-center justify-center gap-1 cursor-pointer focus:outline-none"
+          onClick={handleFractionalize}
+        >
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdOutlineCamera />
           </span>
           <span className="text-center uppercase font-medium">FRACTIONALIZE</span>
-        </div>
+        </button>
       </div>
-      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
+      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-lightyellow">
         <div className="title uppercase text-center text-xl  w-full">Governance</div>
 
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
@@ -118,7 +300,10 @@ export default function Dashboard() {
           </span>
         </div>
 
-        <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
+        <button
+          className="icons flex flex-col items-center justify-center gap-1 cursor-pointer focus:outline-none"
+          onClick={handleCommerceGov}
+        >
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <HiOutlineBuildingLibrary />
           </span>
@@ -127,7 +312,7 @@ export default function Dashboard() {
             <br />
             GOVERNANCE
           </span>
-        </div>
+        </button>
 
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
@@ -143,43 +328,15 @@ export default function Dashboard() {
 
       <div className="center col-start-3 col-span-8 row-start-3 row-span-5 flex items-center gap-4 p-4">
         <div className="border-0 rounded-2xl p-4 h-full flex-1 resize-none am-bg-translucent-blue flex flex-col justify-center">
-          <h3 className="text-xl mb-3">Asset Price: $864k</h3>
-          <h4 className="text-lg mb-2">Share Owners:</h4>
+          {governanceJSX}
 
-          {!Left ? (
-            <>
-              <p className="text-sm">
-                0xaecdoo: <strong>1</strong>
-              </p>
-              <p className="text-sm">
-                0xaecdba: <strong>0</strong>
-              </p>
-              <p className="text-sm">
-                0xcd3223: <strong>0</strong>
-              </p>
-              <p className="text-sm">
-                Fractions: <strong>1</strong>
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="text-sm">
-                0xaecdoo: <strong>40%</strong>
-              </p>
-              <p className="text-sm">
-                0xaecdba: <strong>30%</strong>
-              </p>
-              <p className="text-sm">
-                0xcd3223: <strong>30%</strong>
-              </p>
-              <p className="text-sm">
-                Fractions: <strong>100</strong>
-              </p>
-            </>
-          )}
           <p className="text-sm mt-2">
             Access: <strong>{!Left ? "Disabled" : "Enabled"}</strong>
           </p>
+          <br />
+          <br />
+
+          {hipaaJSX}
         </div>
         <div className="button flex-1 flex flex-col items-center justify-center gap-1">
           <span className="text-8xl rounded-[50%] border-4 border-black p-4">
@@ -192,7 +349,7 @@ export default function Dashboard() {
           </span>
         </div>
         <div className="border-0 rounded-2xl p-4 h-full flex-1 resize-none am-bg-translucent-blue flex flex-col justify-center">
-          {!Right ? (
+          {domainInitValue?.pathModelling ? (
             <>
               <p className="text-sm">
                 Pathway Model: <strong>P3290</strong>
@@ -238,7 +395,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="right col-start-11 col-span-2 row-start-3 row-span-5 flex flex-col gap-4 p-4 am-bg-translucent rounded-2xl">
+      <div className="right col-start-11 col-span-2 row-start-3 row-span-5 flex flex-col gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-lightblue">
         <div className="title uppercase text-center text-xl col-span-1">Domains</div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -331,12 +488,15 @@ export default function Dashboard() {
       <div className="bottom col-start-1 col-span-12 row-start-8 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
         <div className="title uppercase text-center text-xl  w-full">Compliance</div>
 
-        <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
+        <button
+          className="icons flex flex-col items-center justify-center gap-1 cursor-pointer focus:outline-none"
+          onClick={handleHipaaOversight}
+        >
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <ImHammer2 />
           </span>
           <span className="text-center uppercase font-medium">Hipaa Oversight</span>
-        </div>
+        </button>
 
         <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
@@ -349,7 +509,7 @@ export default function Dashboard() {
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserShield />
           </span>
-          <span className="text-center uppercase font-medium">DataSec Compliance</span>
+          <span className="text-center uppercase font-medium">GDPR Compliance</span>
         </div>
       </div>
     </main>

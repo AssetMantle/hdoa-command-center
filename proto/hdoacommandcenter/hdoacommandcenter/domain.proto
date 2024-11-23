@@ -1,0 +1,15 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+message Domain {
+  uint64 id = 1;
+  bool docPathway = 2; 
+  bool nursePathway = 3; 
+  bool adminPathway = 4; 
+  bool pharmaPathway = 5; 
+  bool pathModelling = 6; 
+  bool resourceTracing = 7; 
+  string creator = 8;
+}

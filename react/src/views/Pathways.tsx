@@ -5,11 +5,34 @@ import { FaMinusCircle } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import LeftSvg from "../components/traceability/LeftSvg";
 import RightSvg from "../components/traceability/RightSvg";
+import { useResetState } from "../def-hooks/ResetStateContext";
+import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
+import { hookOptions, perPage } from "../utils/library";
 // import useEsgobservabilitydemoEsgobservabilitydemo from "../hooks/useEsgobservabilitydemoEsgobservabilitydemo";
 
 export default function Pathways() {
   const [Sign1, setSign1] = useState(true);
   const [Sign2, setSign2] = useState(false);
+
+  const { resetState: latestIndexes } = useResetState();
+  const { QueryDomainAll, QueryCommerceAll, QueryComplianceAll, QueryGovernanceAll } =
+    useHdoacommandcenterHdoacommandcenter();
+  // DOMAIN VALUES
+  const domainAll = QueryDomainAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const domainLatestIndex = isNaN(Number(latestIndexes[2])) ? 0 : Number(latestIndexes[2]);
+  const domainLatestValue = domainAll?.data?.pages?.[0]?.Domain?.[domainLatestIndex] || {};
+  const domainInitValue = {
+    adminPathway: domainLatestValue?.adminPathway || false,
+    docPathway: domainLatestValue?.docPathway || false,
+    nursePathway: domainLatestValue?.nursePathway || false,
+    resourceTracing: domainLatestValue?.resourceTracing || false,
+    pharmaPathway: domainLatestValue?.pharmaPathway || false,
+    pathModelling: domainLatestValue?.pathModelling || false,
+  };
 
   // Change below state to change U shape to single line and vice-versa
   const [UIChangeState, setUIChangeState] = useState(false);
@@ -122,7 +145,7 @@ export default function Pathways() {
   return (
     <div className="am-esg-traceability">
       <main className="am-bg-translucent">
-        {UIChangeState ? (
+        {domainInitValue?.pathModelling ? (
           <>
             <div className="content">
               <div className="center">

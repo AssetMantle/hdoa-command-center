@@ -11,6 +11,9 @@
   --am-esg-black: #111111;
   --am-esg-green: #09cb7a;
   --am-esg-cyan: #a3d9cf;
+  --am-esg-orange: #e8d5b6;
+  --am-esg-lightyellow: #d4deae;
+  --am-esg-lightblue: #e2d8fe;
   --am-esg-blue: #0d2e6e;
   --am-esg-blue-2: #01338e;
   --am-esg-blue-light: #1373e6;
@@ -61,6 +64,15 @@ body {
     }
     &-cyan {
       background-color: var(--am-esg-cyan);
+    }
+    &-gray {
+      background-color: var(--am-esg-orange);
+    }
+    &-lightyellow {
+      background-color: var(--am-esg-lightyellow);
+    }
+    &-lightblue {
+      background-color: var(--am-esg-lightblue);
     }
   }
   &-color {

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+message Commerce {
+  uint64 id = 1;
+  bool fractionalize = 2; 
+  bool access = 3; 
+  bool sell = 4; 
+  string creator = 5;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+message Governance {
+  uint64 id = 1;
+  bool healthcareGov = 2; 
+  bool commerceGov = 3; 
+  bool complianceGov = 4; 
+  string creator = 5;
+}

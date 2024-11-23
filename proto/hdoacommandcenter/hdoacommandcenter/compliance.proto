@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+message Compliance {
+  uint64 id = 1;
+  bool hipaaOversight = 2; 
+  bool govOversight = 3; 
+  bool dataSecCompliance = 4; 
+  string creator = 5;
+}
