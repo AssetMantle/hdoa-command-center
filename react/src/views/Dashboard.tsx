@@ -19,12 +19,6 @@ export default function Dashboard() {
         <div className="title uppercase text-center text-xl">Commerce</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
-            <MdAutoGraph />
-          </span>
-          <span className="text-center uppercase font-medium">Buy</span>
-        </div>
-        <div className="icons flex flex-col items-center justify-center gap-1">
-          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaHandHoldingUsd />
           </span>
           <span className="text-center uppercase font-medium">Sell</span>
@@ -35,15 +29,17 @@ export default function Dashboard() {
           </span>
           <span className="text-center uppercase font-medium">Trade</span>
         </div>
+        <div className="icons flex flex-col items-center justify-center gap-1">
+          <span className="text-4xl rounded-[50%] border-4 border-black p-3">
+            <MdAutoGraph />
+          </span>
+          <span className="text-center uppercase font-medium">Access</span>
+        </div>
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <MdOutlineCamera />
           </span>
-          <span className="text-center uppercase font-medium">
-            FRACTIONALIZATION
-            <br />
-            GOVERNANCE
-          </span>
+          <span className="text-center uppercase font-medium">FRACTIONALIZE</span>
         </div>
       </div>
       <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
