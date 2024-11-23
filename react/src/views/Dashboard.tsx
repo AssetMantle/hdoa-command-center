@@ -11,11 +11,11 @@ import { PiHandshakeBold } from "react-icons/pi";
 import { RiAdminFill } from "react-icons/ri";
 
 export default function Dashboard() {
-  const [Left, setLeft] = useState("");
-  const [Right, setRight] = useState("");
+  const [Left, setLeft] = useState(false);
+  const [Right, setRight] = useState(false);
   return (
     <main className="container m-auto my-4 grid grid-cols-12 grid-rows-9 gap-4">
-      <div className="left col-start-1 col-span-2 row-start-3 row-span-5 flex flex-col items-center justify-center gap-4 p-4 am-bg-translucent rounded-2xl">
+      <div className="left col-start-1 col-span-2 row-start-3 row-span-5 flex flex-col items-center justify-center gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
         <div className="title uppercase text-center text-xl">Commerce</div>
         <div className="icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
@@ -42,7 +42,7 @@ export default function Dashboard() {
           <span className="text-center uppercase font-medium">FRACTIONALIZE</span>
         </div>
       </div>
-      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
+      <div className="top col-start-1 col-span-12 row-start-1 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
         <div className="title uppercase text-center text-xl  w-full">Governance</div>
         <div className="w-[min(166px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
@@ -76,13 +76,45 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="center col-start-3 col-span-8 row-start-3 row-span-5 flex items-center gap-4 p-4">
-        <textarea
-          className="border-0 rounded-2xl px-2 py-1 h-full flex-1 resize-none am-bg-translucent-blue"
-          value={Left}
-          onChange={(e) => setLeft(e.target.value)}
-          placeholder=""
-          required
-        />
+        <div className="border-0 rounded-2xl p-4 h-full flex-1 resize-none am-bg-translucent-blue flex flex-col justify-center">
+          <h3 className="text-xl mb-3">Asset Price: $864k</h3>
+          <h4 className="text-lg mb-2">Share Owners:</h4>
+
+          {!Left ? (
+            <>
+              <p className="text-sm">
+                0xaecdoo: <strong>1</strong>
+              </p>
+              <p className="text-sm">
+                0xaecdba: <strong>0</strong>
+              </p>
+              <p className="text-sm">
+                0xcd3223: <strong>0</strong>
+              </p>
+              <p className="text-sm">
+                Fractions: <strong>1</strong>
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-sm">
+                0xaecdoo: <strong>40%</strong>
+              </p>
+              <p className="text-sm">
+                0xaecdba: <strong>30%</strong>
+              </p>
+              <p className="text-sm">
+                0xcd3223: <strong>30%</strong>
+              </p>
+              <p className="text-sm">
+                Fractions: <strong>100</strong>
+              </p>
+            </>
+          )}
+          <p className="text-sm mt-2">
+            Access: <strong>{!Left ? "Disabled" : "Enabled"}</strong>
+          </p>
+        </div>
         <div className="button flex-1 flex flex-col items-center justify-center gap-1">
           <span className="text-8xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
@@ -93,13 +125,51 @@ export default function Dashboard() {
             Owned Asset
           </span>
         </div>
-        <textarea
-          className="border-0 rounded-2xl px-2 py-1 h-full flex-1 resize-none am-bg-translucent-blue"
-          value={Right}
-          onChange={(e) => setRight(e.target.value)}
-          placeholder=""
-          required
-        />
+        <div className="border-0 rounded-2xl p-4 h-full flex-1 resize-none am-bg-translucent-blue flex flex-col justify-center">
+          {!Right ? (
+            <>
+              <p className="text-sm">
+                Pathway Model: <strong>P3290</strong>
+              </p>
+              <p className="text-sm">
+                Adaptive: <strong>True</strong>
+              </p>
+              <p className="text-sm">
+                Speciality: <strong>Oncology</strong>
+              </p>
+              <p className="text-sm">
+                Population Type: <strong>Geriatric</strong>
+              </p>
+              <p className="text-sm">
+                Clinical Condition: <strong>Lung Cancer</strong>
+              </p>
+              <p className="text-sm">
+                Patients: <strong>22119</strong>
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-sm">
+                Pathway Model: <strong>7277</strong>
+              </p>
+              <p className="text-sm">
+                Adaptive: <strong>False</strong>
+              </p>
+              <p className="text-sm">
+                Speciality: <strong>Oncology</strong>
+              </p>
+              <p className="text-sm">
+                Population Type: <strong>Pediatric</strong>
+              </p>
+              <p className="text-sm">
+                Clinical Condition: <strong>Lung Cancer</strong>
+              </p>
+              <p className="text-sm">
+                Patients: <strong>33225</strong>
+              </p>
+            </>
+          )}
+        </div>
       </div>
       <div className="right col-start-11 col-span-2 row-start-3 row-span-5 flex flex-col gap-4 p-4 am-bg-translucent rounded-2xl">
         <div className="title uppercase text-center text-xl col-span-1">Domains</div>
@@ -166,7 +236,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="bottom col-start-1 col-span-12 row-start-8 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl">
+      <div className="bottom col-start-1 col-span-12 row-start-8 row-span-2 flex flex-wrap items-center justify-evenly gap-4 p-4 am-bg-translucent rounded-2xl am-esg-bg-cyan">
         <div className="title uppercase text-center text-xl  w-full">Compliance</div>
         <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
