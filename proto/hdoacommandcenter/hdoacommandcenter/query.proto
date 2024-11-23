@@ -1,26 +1,142 @@
 syntax = "proto3";
+
 package hdoacommandcenter.hdoacommandcenter;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "hdoacommandcenter/hdoacommandcenter/params.proto";
+import "hdoacommandcenter/hdoacommandcenter/commerce.proto";
+import "hdoacommandcenter/hdoacommandcenter/governance.proto";
+import "hdoacommandcenter/hdoacommandcenter/domain.proto";
+import "hdoacommandcenter/hdoacommandcenter/compliance.proto";
 
 option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/params";
+  
+  }
+  
+  // Queries a list of Commerce items.
+  rpc Commerce    (QueryGetCommerceRequest) returns (QueryGetCommerceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/commerce/{id}";
+  
+  }
+  rpc CommerceAll (QueryAllCommerceRequest) returns (QueryAllCommerceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/commerce";
+  
+  }
+  
+  // Queries a list of Governance items.
+  rpc Governance    (QueryGetGovernanceRequest) returns (QueryGetGovernanceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/governance/{id}";
+  
+  }
+  rpc GovernanceAll (QueryAllGovernanceRequest) returns (QueryAllGovernanceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/governance";
+  
+  }
+  
+  // Queries a list of Domain items.
+  rpc Domain    (QueryGetDomainRequest) returns (QueryGetDomainResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/domain/{id}";
+  
+  }
+  rpc DomainAll (QueryAllDomainRequest) returns (QueryAllDomainResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/domain";
+  
+  }
+  
+  // Queries a list of Compliance items.
+  rpc Compliance    (QueryGetComplianceRequest) returns (QueryGetComplianceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/compliance/{id}";
+  
+  }
+  rpc ComplianceAll (QueryAllComplianceRequest) returns (QueryAllComplianceResponse) {
+    option (google.api.http).get = "/hdoa-command-center/hdoacommandcenter/compliance";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetCommerceRequest {
+  uint64 id = 1;
+}
+
+message QueryGetCommerceResponse {
+  Commerce Commerce = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllCommerceRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllCommerceResponse {
+  repeated Commerce                               Commerce   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetGovernanceRequest {
+  uint64 id = 1;
+}
+
+message QueryGetGovernanceResponse {
+  Governance Governance = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllGovernanceRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllGovernanceResponse {
+  repeated Governance                             Governance = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetDomainRequest {
+  uint64 id = 1;
+}
+
+message QueryGetDomainResponse {
+  Domain Domain = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllDomainRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDomainResponse {
+  repeated Domain                                 Domain     = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetComplianceRequest {
+  uint64 id = 1;
+}
+
+message QueryGetComplianceResponse {
+  Compliance Compliance = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllComplianceRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllComplianceResponse {
+  repeated Compliance                             Compliance = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

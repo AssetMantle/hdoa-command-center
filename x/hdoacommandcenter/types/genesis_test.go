@@ -19,12 +19,152 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				CommerceList: []types.Commerce{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				CommerceCount: 2,
+				GovernanceList: []types.Governance{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				GovernanceCount: 2,
+				DomainList: []types.Domain{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				DomainCount: 2,
+				ComplianceList: []types.Compliance{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				ComplianceCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated commerce",
+			genState: &types.GenesisState{
+				CommerceList: []types.Commerce{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid commerce count",
+			genState: &types.GenesisState{
+				CommerceList: []types.Commerce{
+					{
+						Id: 1,
+					},
+				},
+				CommerceCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated governance",
+			genState: &types.GenesisState{
+				GovernanceList: []types.Governance{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid governance count",
+			genState: &types.GenesisState{
+				GovernanceList: []types.Governance{
+					{
+						Id: 1,
+					},
+				},
+				GovernanceCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated domain",
+			genState: &types.GenesisState{
+				DomainList: []types.Domain{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid domain count",
+			genState: &types.GenesisState{
+				DomainList: []types.Domain{
+					{
+						Id: 1,
+					},
+				},
+				DomainCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated compliance",
+			genState: &types.GenesisState{
+				ComplianceList: []types.Compliance{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid compliance count",
+			genState: &types.GenesisState{
+				ComplianceList: []types.Compliance{
+					{
+						Id: 1,
+					},
+				},
+				ComplianceCount: 0,
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	}

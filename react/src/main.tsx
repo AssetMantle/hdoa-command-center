@@ -9,6 +9,7 @@ import AddressProvider from "./def-hooks/addressContext";
 import DenomProvider from "./def-hooks/denomContext";
 import WalletProvider from "./def-hooks/walletContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ResetStateProvider } from "./def-hooks/ResetStateContext";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <AddressProvider>
         <WalletProvider>
           <DenomProvider>
-            <RouterProvider router={router} />
+            <ResetStateProvider>
+              <RouterProvider router={router} />
+            </ResetStateProvider>
           </DenomProvider>
         </WalletProvider>
       </AddressProvider>

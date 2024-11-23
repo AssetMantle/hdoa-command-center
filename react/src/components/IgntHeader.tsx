@@ -1,6 +1,9 @@
 import { IgntLink, IgntLogo } from "@ignt/react-library";
 import IgntAcc from "./IgntAcc";
 import { IoReloadCircle } from "react-icons/io5";
+import { useResetState } from "../def-hooks/ResetStateContext";
+import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
+import { hookOptions, perPage } from "../utils/library";
 
 type MenuItem = {
   label: string;
@@ -13,8 +16,64 @@ interface IgntHeaderProps {
 export default function IgntHeader(props: IgntHeaderProps) {
   const { navItems } = props;
 
+  const { setResetState } = useResetState();
+  const { QueryCommerceAll, QueryComplianceAll, QueryDomainAll, QueryGovernanceAll } =
+    useHdoacommandcenterHdoacommandcenter();
+
+  const commerceAll = QueryCommerceAll(
+    {
+      "pagination.limit": perPage,
+      "pagination.offset": 0,
+      "pagination.count_total": true,
+      "pagination.reverse": false,
+    },
+    hookOptions,
+    perPage,
+  );
+
+  const commerceLatestCount = commerceAll?.data?.pages?.[0]?.pagination?.total || "0";
+
+  const complianceAll = QueryComplianceAll(
+    {
+      "pagination.limit": perPage,
+      "pagination.offset": 0,
+      "pagination.count_total": true,
+      "pagination.reverse": false,
+    },
+    hookOptions,
+    perPage,
+  );
+
+  const complianceLatestCount = complianceAll?.data?.pages?.[0]?.pagination?.total || "0";
+
+  const domainAll = QueryDomainAll(
+    {
+      "pagination.limit": perPage,
+      "pagination.offset": 0,
+      "pagination.count_total": true,
+      "pagination.reverse": false,
+    },
+    hookOptions,
+    perPage,
+  );
+
+  const domainLatestCount = domainAll?.data?.pages?.[0]?.pagination?.total || "0";
+
+  const governanceAll = QueryGovernanceAll(
+    {
+      "pagination.limit": perPage,
+      "pagination.offset": 0,
+      "pagination.count_total": true,
+      "pagination.reverse": false,
+    },
+    hookOptions,
+    perPage,
+  );
+
+  const governanceLatestCount = governanceAll?.data?.pages?.[0]?.pagination?.total || "0";
+
   const updateState = () => {
-    return null;
+    setResetState([commerceLatestCount, complianceLatestCount, domainLatestCount, governanceLatestCount]);
   };
 
   return (

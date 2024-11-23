@@ -17,3 +17,23 @@ const (
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
+
+const (
+	CommerceKey      = "Commerce/value/"
+	CommerceCountKey = "Commerce/count/"
+)
+
+const (
+	GovernanceKey      = "Governance/value/"
+	GovernanceCountKey = "Governance/count/"
+)
+
+const (
+	DomainKey      = "Domain/value/"
+	DomainCountKey = "Domain/count/"
+)
+
+const (
+	ComplianceKey      = "Compliance/value/"
+	ComplianceCountKey = "Compliance/count/"
+)

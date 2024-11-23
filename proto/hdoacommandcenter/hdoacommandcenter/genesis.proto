@@ -1,12 +1,26 @@
 syntax = "proto3";
+
 package hdoacommandcenter.hdoacommandcenter;
 
 import "gogoproto/gogo.proto";
 import "hdoacommandcenter/hdoacommandcenter/params.proto";
+import "hdoacommandcenter/hdoacommandcenter/commerce.proto";
+import "hdoacommandcenter/hdoacommandcenter/governance.proto";
+import "hdoacommandcenter/hdoacommandcenter/domain.proto";
+import "hdoacommandcenter/hdoacommandcenter/compliance.proto";
 
 option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
 
 // GenesisState defines the hdoacommandcenter module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+           Params     params          = 1 [(gogoproto.nullable) = false];
+  repeated Commerce   commerceList    = 2 [(gogoproto.nullable) = false];
+           uint64     commerceCount   = 3;
+  repeated Governance governanceList  = 4 [(gogoproto.nullable) = false];
+           uint64     governanceCount = 5;
+  repeated Domain     domainList      = 6 [(gogoproto.nullable) = false];
+           uint64     domainCount     = 7;
+  repeated Compliance complianceList  = 8 [(gogoproto.nullable) = false];
+           uint64     complianceCount = 9;
 }
+

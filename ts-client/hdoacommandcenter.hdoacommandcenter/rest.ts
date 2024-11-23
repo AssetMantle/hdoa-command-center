@@ -9,10 +9,161 @@
  * ---------------------------------------------------------------
  */
 
+export interface HdoacommandcenterCommerce {
+  /** @format uint64 */
+  id?: string;
+  fractionalize?: boolean;
+  access?: boolean;
+  sell?: boolean;
+  creator?: string;
+}
+
+export interface HdoacommandcenterCompliance {
+  /** @format uint64 */
+  id?: string;
+  hipaaOversight?: boolean;
+  govOversight?: boolean;
+  dataSecCompliance?: boolean;
+  creator?: string;
+}
+
+export interface HdoacommandcenterDomain {
+  /** @format uint64 */
+  id?: string;
+  docPathway?: boolean;
+  nursePathway?: boolean;
+  adminPathway?: boolean;
+  pharmaPathway?: boolean;
+  pathModelling?: boolean;
+  resourceTracing?: boolean;
+  creator?: string;
+}
+
+export interface HdoacommandcenterGovernance {
+  /** @format uint64 */
+  id?: string;
+  healthcareGov?: boolean;
+  commerceGov?: boolean;
+  complianceGov?: boolean;
+  creator?: string;
+}
+
+export interface HdoacommandcenterMsgCreateCommerceResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
+export interface HdoacommandcenterMsgCreateComplianceResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
+export interface HdoacommandcenterMsgCreateDomainResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
+export interface HdoacommandcenterMsgCreateGovernanceResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
+export type HdoacommandcenterMsgDeleteCommerceResponse = object;
+
+export type HdoacommandcenterMsgDeleteComplianceResponse = object;
+
+export type HdoacommandcenterMsgDeleteDomainResponse = object;
+
+export type HdoacommandcenterMsgDeleteGovernanceResponse = object;
+
+export type HdoacommandcenterMsgUpdateCommerceResponse = object;
+
+export type HdoacommandcenterMsgUpdateComplianceResponse = object;
+
+export type HdoacommandcenterMsgUpdateDomainResponse = object;
+
+export type HdoacommandcenterMsgUpdateGovernanceResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
 export type HdoacommandcenterParams = object;
+
+export interface HdoacommandcenterQueryAllCommerceResponse {
+  Commerce?: HdoacommandcenterCommerce[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface HdoacommandcenterQueryAllComplianceResponse {
+  Compliance?: HdoacommandcenterCompliance[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface HdoacommandcenterQueryAllDomainResponse {
+  Domain?: HdoacommandcenterDomain[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface HdoacommandcenterQueryAllGovernanceResponse {
+  Governance?: HdoacommandcenterGovernance[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface HdoacommandcenterQueryGetCommerceResponse {
+  Commerce?: HdoacommandcenterCommerce;
+}
+
+export interface HdoacommandcenterQueryGetComplianceResponse {
+  Compliance?: HdoacommandcenterCompliance;
+}
+
+export interface HdoacommandcenterQueryGetDomainResponse {
+  Domain?: HdoacommandcenterDomain;
+}
+
+export interface HdoacommandcenterQueryGetGovernanceResponse {
+  Governance?: HdoacommandcenterGovernance;
+}
 
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -31,6 +182,78 @@ export interface RpcStatus {
   code?: number;
   message?: string;
   details?: ProtobufAny[];
+}
+
+/**
+* message SomeRequest {
+         Foo some_parameter = 1;
+         PageRequest pagination = 2;
+ }
+*/
+export interface V1Beta1PageRequest {
+  /**
+   * key is a value returned in PageResponse.next_key to begin
+   * querying the next page most efficiently. Only one of offset or key
+   * should be set.
+   * @format byte
+   */
+  key?: string;
+
+  /**
+   * offset is a numeric offset that can be used when key is unavailable.
+   * It is less efficient than using key. Only one of offset or key should
+   * be set.
+   * @format uint64
+   */
+  offset?: string;
+
+  /**
+   * limit is the total number of results to be returned in the result page.
+   * If left empty it will default to a value to be set by each app.
+   * @format uint64
+   */
+  limit?: string;
+
+  /**
+   * count_total is set to true  to indicate that the result set should include
+   * a count of the total number of items available for pagination in UIs.
+   * count_total is only respected when offset is used. It is ignored when key
+   * is set.
+   */
+  count_total?: boolean;
+
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
+  reverse?: boolean;
+}
+
+/**
+* PageResponse is to be embedded in gRPC response messages where the
+corresponding request message has used PageRequest.
+
+ message SomeResponse {
+         repeated Bar results = 1;
+         PageResponse page = 2;
+ }
+*/
+export interface V1Beta1PageResponse {
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
+
+  /**
+   * total is total number of results available if PageRequest.count_total
+   * was set, its value is undefined otherwise
+   * @format uint64
+   */
+  total?: string;
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
@@ -154,10 +377,174 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title hdoacommandcenter/hdoacommandcenter/genesis.proto
+ * @title hdoacommandcenter/hdoacommandcenter/commerce.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCommerceAll
+   * @request GET:/hdoa-command-center/hdoacommandcenter/commerce
+   */
+  queryCommerceAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HdoacommandcenterQueryAllCommerceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/commerce`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCommerce
+   * @summary Queries a list of Commerce items.
+   * @request GET:/hdoa-command-center/hdoacommandcenter/commerce/{id}
+   */
+  queryCommerce = (id: string, params: RequestParams = {}) =>
+    this.request<HdoacommandcenterQueryGetCommerceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/commerce/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryComplianceAll
+   * @request GET:/hdoa-command-center/hdoacommandcenter/compliance
+   */
+  queryComplianceAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HdoacommandcenterQueryAllComplianceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/compliance`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCompliance
+   * @summary Queries a list of Compliance items.
+   * @request GET:/hdoa-command-center/hdoacommandcenter/compliance/{id}
+   */
+  queryCompliance = (id: string, params: RequestParams = {}) =>
+    this.request<HdoacommandcenterQueryGetComplianceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/compliance/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDomainAll
+   * @request GET:/hdoa-command-center/hdoacommandcenter/domain
+   */
+  queryDomainAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HdoacommandcenterQueryAllDomainResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/domain`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDomain
+   * @summary Queries a list of Domain items.
+   * @request GET:/hdoa-command-center/hdoacommandcenter/domain/{id}
+   */
+  queryDomain = (id: string, params: RequestParams = {}) =>
+    this.request<HdoacommandcenterQueryGetDomainResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/domain/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryGovernanceAll
+   * @request GET:/hdoa-command-center/hdoacommandcenter/governance
+   */
+  queryGovernanceAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HdoacommandcenterQueryAllGovernanceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/governance`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryGovernance
+   * @summary Queries a list of Governance items.
+   * @request GET:/hdoa-command-center/hdoacommandcenter/governance/{id}
+   */
+  queryGovernance = (id: string, params: RequestParams = {}) =>
+    this.request<HdoacommandcenterQueryGetGovernanceResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/governance/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

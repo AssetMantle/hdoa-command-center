@@ -1,7 +1,144 @@
 syntax = "proto3";
+
 package hdoacommandcenter.hdoacommandcenter;
+
+import "hdoacommandcenter/hdoacommandcenter/commerce.proto";
+import "hdoacommandcenter/hdoacommandcenter/governance.proto";
+import "hdoacommandcenter/hdoacommandcenter/domain.proto";
+import "hdoacommandcenter/hdoacommandcenter/compliance.proto";
 
 option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc CreateCommerce   (MsgCreateCommerce  ) returns (MsgCreateCommerceResponse  );
+  rpc UpdateCommerce   (MsgUpdateCommerce  ) returns (MsgUpdateCommerceResponse  );
+  rpc DeleteCommerce   (MsgDeleteCommerce  ) returns (MsgDeleteCommerceResponse  );
+  rpc CreateGovernance (MsgCreateGovernance) returns (MsgCreateGovernanceResponse);
+  rpc UpdateGovernance (MsgUpdateGovernance) returns (MsgUpdateGovernanceResponse);
+  rpc DeleteGovernance (MsgDeleteGovernance) returns (MsgDeleteGovernanceResponse);
+  rpc CreateDomain     (MsgCreateDomain    ) returns (MsgCreateDomainResponse    );
+  rpc UpdateDomain     (MsgUpdateDomain    ) returns (MsgUpdateDomainResponse    );
+  rpc DeleteDomain     (MsgDeleteDomain    ) returns (MsgDeleteDomainResponse    );
+  rpc CreateCompliance (MsgCreateCompliance) returns (MsgCreateComplianceResponse);
+  rpc UpdateCompliance (MsgUpdateCompliance) returns (MsgUpdateComplianceResponse);
+  rpc DeleteCompliance (MsgDeleteCompliance) returns (MsgDeleteComplianceResponse);
+}
+message MsgCreateCommerce {
+  string creator       = 1;
+  bool   fractionalize = 2;
+  bool   access        = 3;
+  bool   sell          = 4;
+}
+
+message MsgCreateCommerceResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateCommerce {
+  string creator       = 1;
+  uint64 id            = 2;
+  bool   fractionalize = 3;
+  bool   access        = 4;
+  bool   sell          = 5;
+}
+
+message MsgUpdateCommerceResponse {}
+
+message MsgDeleteCommerce {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteCommerceResponse {}
+
+message MsgCreateGovernance {
+  string creator       = 1;
+  bool   healthcareGov = 2;
+  bool   commerceGov   = 3;
+  bool   complianceGov = 4;
+}
+
+message MsgCreateGovernanceResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateGovernance {
+  string creator       = 1;
+  uint64 id            = 2;
+  bool   healthcareGov = 3;
+  bool   commerceGov   = 4;
+  bool   complianceGov = 5;
+}
+
+message MsgUpdateGovernanceResponse {}
+
+message MsgDeleteGovernance {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteGovernanceResponse {}
+
+message MsgCreateDomain {
+  string creator         = 1;
+  bool   docPathway      = 2;
+  bool   nursePathway    = 3;
+  bool   adminPathway    = 4;
+  bool   pharmaPathway   = 5;
+  bool   pathModelling   = 6;
+  bool   resourceTracing = 7;
+}
+
+message MsgCreateDomainResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateDomain {
+  string creator         = 1;
+  uint64 id              = 2;
+  bool   docPathway      = 3;
+  bool   nursePathway    = 4;
+  bool   adminPathway    = 5;
+  bool   pharmaPathway   = 6;
+  bool   pathModelling   = 7;
+  bool   resourceTracing = 8;
+}
+
+message MsgUpdateDomainResponse {}
+
+message MsgDeleteDomain {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteDomainResponse {}
+
+message MsgCreateCompliance {
+  string creator           = 1;
+  bool   hipaaOversight    = 2;
+  bool   govOversight      = 3;
+  bool   dataSecCompliance = 4;
+}
+
+message MsgCreateComplianceResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateCompliance {
+  string creator           = 1;
+  uint64 id                = 2;
+  bool   hipaaOversight    = 3;
+  bool   govOversight      = 4;
+  bool   dataSecCompliance = 5;
+}
+
+message MsgUpdateComplianceResponse {}
+
+message MsgDeleteCompliance {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteComplianceResponse {}
+
