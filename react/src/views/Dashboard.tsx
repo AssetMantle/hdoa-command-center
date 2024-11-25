@@ -14,6 +14,7 @@ import { useResetState } from "../def-hooks/ResetStateContext";
 import { useClient } from "../hooks/useClient";
 import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
 import { hookOptions, perPage } from "../utils/library";
+import RandomRGB from "../utils/RandomRGB";
 
 export default function Dashboard() {
   const lcaClient = useClient();
@@ -369,7 +370,10 @@ export default function Dashboard() {
           <span className="text-8xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
           </span>
-          <span className="text-center font-bold text-4xl">
+          <span
+            className="text-center font-bold text-4xl"
+            style={{ color: uniqueVariant === 0 ? "#000000" : RandomRGB() }}
+          >
             <em>h</em>
             {`DOA : ${Number(uniqueVariant + 1)}`}
           </span>

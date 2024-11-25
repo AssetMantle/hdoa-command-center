@@ -8,6 +8,7 @@ import RightSvg from "../components/traceability/RightSvg";
 import { useResetState } from "../def-hooks/ResetStateContext";
 import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
 import { hookOptions, perPage } from "../utils/library";
+import RandomRGB from "../utils/RandomRGB";
 // import useEsgobservabilitydemoEsgobservabilitydemo from "../hooks/useEsgobservabilitydemoEsgobservabilitydemo";
 
 export default function Pathways() {
@@ -150,7 +151,7 @@ export default function Pathways() {
 
   return (
     <div className="am-esg-traceability">
-      <main className="am-bg-translucent">
+      <main className="am-bg-translucent" style={{ "--colorDef": uniqueVariant === 0 ? "#000000" : RandomRGB() }}>
         {domainInitValue?.pathModelling ? (
           <>
             <div className="content">

@@ -5,6 +5,7 @@ import { useResetState } from "../def-hooks/ResetStateContext";
 import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenterHdoacommandcenter";
 import { hookOptions, perPage } from "../utils/library";
 import { useClient } from "../hooks/useClient";
+import RandomRGB from "../utils/RandomRGB";
 
 export default function AssetVariant() {
   const creatorAddressObject = useAddressContext();
@@ -67,8 +68,8 @@ export default function AssetVariant() {
   };
 
   return (
-    <main className="container m-auto my-4 grid grid-cols-3 grid-rows-3 gap-4 am-bg-translucent">
-      <div className="item flex p-6 pl-10">
+    <main className="container m-auto my-4 grid grid-cols-3 grid-rows-3 gap-4">
+      <div className="item am-bg-translucent rounded-md flex p-6 pl-10">
         <div className="form w-[167px]">
           <p>Terminology Standard</p>
           <div className="flex items-center gap-1">
@@ -95,7 +96,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6">
+      <div className="item am-bg-translucent rounded-md flex p-6">
         <div className="form mx-auto w-[187px]">
           <p>Data Exchange Standard</p>
           <div className="flex items-center gap-1">
@@ -122,7 +123,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6 ml-16">
+      <div className="item am-bg-translucent rounded-md flex p-6">
         <div className="form mx-auto w-[174px]">
           <p>Biomedical Vocabulary</p>
           <div className="flex items-center gap-1">
@@ -149,7 +150,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6 pl-10">
+      <div className="item am-bg-translucent rounded-md flex p-6 pl-10">
         <div className="form w-[167px]">
           <p>Workflow Standard</p>
           <div className="flex items-center gap-1">
@@ -176,12 +177,12 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item">
+      <div className="item am-bg-translucent rounded-md p-4">
         <div className="button flex-1 flex flex-col items-center justify-center gap-1">
           <span className="text-7xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
           </span>
-          <span className="text-center font-bold">
+          <span className={`text-center font-bold`} style={{ color: uniqueVariant === 0 ? "#000000" : RandomRGB() }}>
             <em>h</em>
             {`DOA Variant ${uniqueVariant + 1}`}
           </span>
@@ -190,7 +191,7 @@ export default function AssetVariant() {
           </button>
         </div>
       </div>
-      <div className="item flex p-6 ml-16">
+      <div className="item am-bg-translucent rounded-md flex p-6">
         <div className="form mx-auto w-[174px]">
           <p>Data Privacy</p>
           <div className="flex items-center gap-1">
@@ -217,7 +218,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6 pl-10">
+      <div className="item am-bg-translucent rounded-md flex p-6 pl-10">
         <div className="form w-[167px]">
           <p>Interoperability</p>
           <div className="flex items-center gap-1">
@@ -244,7 +245,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6">
+      <div className="item am-bg-translucent rounded-md flex p-6">
         <div className="form mx-auto w-[187px]">
           <p>Imaging Standard</p>
           <div className="flex items-center gap-1">
@@ -271,7 +272,7 @@ export default function AssetVariant() {
           </div>
         </div>
       </div>
-      <div className="item flex p-6 ml-16">
+      <div className="item am-bg-translucent rounded-md flex p-6">
         <div className="form mx-auto w-[174px]">
           <p>Security Standard</p>
           <div className="flex items-center gap-1">
