@@ -11,12 +11,8 @@ import { hookOptions, perPage } from "../utils/library";
 // import useEsgobservabilitydemoEsgobservabilitydemo from "../hooks/useEsgobservabilitydemoEsgobservabilitydemo";
 
 export default function Pathways() {
-  const [Sign1, setSign1] = useState(true);
-  const [Sign2, setSign2] = useState(false);
-
   const { resetState: latestIndexes } = useResetState();
-  const { QueryDomainAll, QueryCommerceAll, QueryComplianceAll, QueryGovernanceAll } =
-    useHdoacommandcenterHdoacommandcenter();
+  const { QueryDomainAll, QueryFactoryAll } = useHdoacommandcenterHdoacommandcenter();
   // DOMAIN VALUES
   const domainAll = QueryDomainAll(
     { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
@@ -33,9 +29,17 @@ export default function Pathways() {
     pharmaPathway: domainLatestValue?.pharmaPathway || false,
     pathModelling: domainLatestValue?.pathModelling || false,
   };
-
-  // Change below state to change U shape to single line and vice-versa
-  const [UIChangeState, setUIChangeState] = useState(false);
+  // FACTORY MODE VALUES
+  const factoryModeAll = QueryFactoryAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const factoryModeLatestIndex = isNaN(Number(latestIndexes[2])) ? 0 : Number(latestIndexes[2]);
+  const factoryModeLatestValue = factoryModeAll?.data?.pages?.[0]?.Factory?.[factoryModeLatestIndex] || {};
+  const factoryModeInitValue = {
+    mode: factoryModeLatestValue?.mode || 0,
+  };
 
   const DATA = {
     title: "Title Here",
@@ -53,7 +57,7 @@ export default function Pathways() {
         state: "completed",
       },
       {
-        title: "Administrative Stuff",
+        title: "Administrative Staff",
         hash: "asdfjakjhwnan",
         primaryKey: "asdfjakjhwnan",
         otherKey: "asdfjakjhwnan",
@@ -101,7 +105,7 @@ export default function Pathways() {
         state: "completed",
       },
       {
-        title: "Administrative Stuff",
+        title: "Administrative Staff",
         hash: "asdfjakjhwnan",
         primaryKey: "asdfjakjhwnan",
         otherKey: "asdfjakjhwnan",
@@ -141,6 +145,8 @@ export default function Pathways() {
       },
     ],
   };
+
+  const uniqueVariant = factoryModeInitValue?.mode || 0;
 
   return (
     <div className="am-esg-traceability">
