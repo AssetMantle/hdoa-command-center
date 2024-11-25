@@ -5,6 +5,7 @@ import IgntHeader from "../components/IgntHeader";
 // import PortfolioView from "../views/PortfolioView";
 import Dashboard from "../views/Dashboard";
 import Pathways from "../views/Pathways";
+import AssetVariant from "../views/AssetVariant";
 
 const items = [
   {
@@ -14,6 +15,10 @@ const items = [
   {
     label: "Data",
     to: "/data",
+  },
+  {
+    label: "Asset Variant",
+    to: "/asset-variant",
   },
 ];
 const Layout = () => {
@@ -31,6 +36,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/data", element: <Pathways /> },
+      { path: "/asset-variant", element: <AssetVariant /> },
     ],
   },
 ]);
