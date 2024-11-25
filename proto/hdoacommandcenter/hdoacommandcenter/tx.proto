@@ -6,6 +6,7 @@ import "hdoacommandcenter/hdoacommandcenter/commerce.proto";
 import "hdoacommandcenter/hdoacommandcenter/governance.proto";
 import "hdoacommandcenter/hdoacommandcenter/domain.proto";
 import "hdoacommandcenter/hdoacommandcenter/compliance.proto";
+import "hdoacommandcenter/hdoacommandcenter/factory.proto";
 
 option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
 
@@ -23,6 +24,9 @@ service Msg {
   rpc CreateCompliance (MsgCreateCompliance) returns (MsgCreateComplianceResponse);
   rpc UpdateCompliance (MsgUpdateCompliance) returns (MsgUpdateComplianceResponse);
   rpc DeleteCompliance (MsgDeleteCompliance) returns (MsgDeleteComplianceResponse);
+  rpc CreateFactory    (MsgCreateFactory   ) returns (MsgCreateFactoryResponse   );
+  rpc UpdateFactory    (MsgUpdateFactory   ) returns (MsgUpdateFactoryResponse   );
+  rpc DeleteFactory    (MsgDeleteFactory   ) returns (MsgDeleteFactoryResponse   );
 }
 message MsgCreateCommerce {
   string creator       = 1;
@@ -141,4 +145,28 @@ message MsgDeleteCompliance {
 }
 
 message MsgDeleteComplianceResponse {}
+
+message MsgCreateFactory {
+  string creator = 1;
+  int32  mode    = 2;
+}
+
+message MsgCreateFactoryResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateFactory {
+  string creator = 1;
+  uint64 id      = 2;
+  int32  mode    = 3;
+}
+
+message MsgUpdateFactoryResponse {}
+
+message MsgDeleteFactory {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteFactoryResponse {}
 

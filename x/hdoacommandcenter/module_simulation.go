@@ -71,6 +71,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteCompliance int = 100
 
+	opWeightMsgCreateFactory = "op_weight_msg_factory"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateFactory int = 100
+
+	opWeightMsgUpdateFactory = "op_weight_msg_factory"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateFactory int = 100
+
+	opWeightMsgDeleteFactory = "op_weight_msg_factory"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteFactory int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -126,6 +138,17 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 			},
 		},
 		ComplianceCount: 2,
+		FactoryList: []types.Factory{
+			{
+				Id:      0,
+				Creator: sample.AccAddress(),
+			},
+			{
+				Id:      1,
+				Creator: sample.AccAddress(),
+			},
+		},
+		FactoryCount: 2,
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&hdoacommandcenterGenesis)
@@ -275,6 +298,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		hdoacommandcentersimulation.SimulateMsgDeleteCompliance(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateFactory int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateFactory, &weightMsgCreateFactory, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateFactory = defaultWeightMsgCreateFactory
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateFactory,
+		hdoacommandcentersimulation.SimulateMsgCreateFactory(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateFactory int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateFactory, &weightMsgUpdateFactory, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateFactory = defaultWeightMsgUpdateFactory
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateFactory,
+		hdoacommandcentersimulation.SimulateMsgUpdateFactory(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteFactory int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteFactory, &weightMsgDeleteFactory, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteFactory = defaultWeightMsgDeleteFactory
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteFactory,
+		hdoacommandcentersimulation.SimulateMsgDeleteFactory(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -376,6 +432,30 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgDeleteCompliance,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				hdoacommandcentersimulation.SimulateMsgDeleteCompliance(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateFactory,
+			defaultWeightMsgCreateFactory,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				hdoacommandcentersimulation.SimulateMsgCreateFactory(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgUpdateFactory,
+			defaultWeightMsgUpdateFactory,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				hdoacommandcentersimulation.SimulateMsgUpdateFactory(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgDeleteFactory,
+			defaultWeightMsgDeleteFactory,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				hdoacommandcentersimulation.SimulateMsgDeleteFactory(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

@@ -36,6 +36,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 	// Set compliance count
 	k.SetComplianceCount(ctx, genState.ComplianceCount)
+	// Set all the factory
+	for _, elem := range genState.FactoryList {
+		k.SetFactory(ctx, elem)
+	}
+
+	// Set factory count
+	k.SetFactoryCount(ctx, genState.FactoryCount)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -53,6 +60,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.DomainCount = k.GetDomainCount(ctx)
 	genesis.ComplianceList = k.GetAllCompliance(ctx)
 	genesis.ComplianceCount = k.GetComplianceCount(ctx)
+	genesis.FactoryList = k.GetAllFactory(ctx)
+	genesis.FactoryCount = k.GetFactoryCount(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

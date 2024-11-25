@@ -1,0 +1,10 @@
+syntax = "proto3";
+package hdoacommandcenter.hdoacommandcenter;
+
+option go_package = "hdoa-command-center/x/hdoacommandcenter/types";
+
+message Factory {
+  uint64 id = 1;
+  int32 mode = 2; 
+  string creator = 3;
+}

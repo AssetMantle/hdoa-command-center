@@ -58,6 +58,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				ComplianceCount: 2,
+				FactoryList: []types.Factory{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				FactoryCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -163,6 +172,32 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				ComplianceCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated factory",
+			genState: &types.GenesisState{
+				FactoryList: []types.Factory{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid factory count",
+			genState: &types.GenesisState{
+				FactoryList: []types.Factory{
+					{
+						Id: 1,
+					},
+				},
+				FactoryCount: 0,
 			},
 			valid: false,
 		},

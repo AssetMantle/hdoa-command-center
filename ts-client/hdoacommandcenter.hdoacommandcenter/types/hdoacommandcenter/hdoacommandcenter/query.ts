@@ -5,6 +5,7 @@ import { PageRequest, PageResponse } from "../../cosmos/base/query/v1beta1/pagin
 import { Commerce } from "./commerce";
 import { Compliance } from "./compliance";
 import { Domain } from "./domain";
+import { Factory } from "./factory";
 import { Governance } from "./governance";
 import { Params } from "./params";
 
@@ -85,6 +86,23 @@ export interface QueryAllComplianceRequest {
 
 export interface QueryAllComplianceResponse {
   Compliance: Compliance[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetFactoryRequest {
+  id: number;
+}
+
+export interface QueryGetFactoryResponse {
+  Factory: Factory | undefined;
+}
+
+export interface QueryAllFactoryRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllFactoryResponse {
+  Factory: Factory[];
   pagination: PageResponse | undefined;
 }
 
@@ -1022,6 +1040,217 @@ export const QueryAllComplianceResponse = {
   },
 };
 
+function createBaseQueryGetFactoryRequest(): QueryGetFactoryRequest {
+  return { id: 0 };
+}
+
+export const QueryGetFactoryRequest = {
+  encode(message: QueryGetFactoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetFactoryRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetFactoryRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetFactoryRequest {
+    return { id: isSet(object.id) ? Number(object.id) : 0 };
+  },
+
+  toJSON(message: QueryGetFactoryRequest): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = Math.round(message.id));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetFactoryRequest>, I>>(object: I): QueryGetFactoryRequest {
+    const message = createBaseQueryGetFactoryRequest();
+    message.id = object.id ?? 0;
+    return message;
+  },
+};
+
+function createBaseQueryGetFactoryResponse(): QueryGetFactoryResponse {
+  return { Factory: undefined };
+}
+
+export const QueryGetFactoryResponse = {
+  encode(message: QueryGetFactoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.Factory !== undefined) {
+      Factory.encode(message.Factory, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetFactoryResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetFactoryResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.Factory = Factory.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetFactoryResponse {
+    return { Factory: isSet(object.Factory) ? Factory.fromJSON(object.Factory) : undefined };
+  },
+
+  toJSON(message: QueryGetFactoryResponse): unknown {
+    const obj: any = {};
+    message.Factory !== undefined && (obj.Factory = message.Factory ? Factory.toJSON(message.Factory) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetFactoryResponse>, I>>(object: I): QueryGetFactoryResponse {
+    const message = createBaseQueryGetFactoryResponse();
+    message.Factory = (object.Factory !== undefined && object.Factory !== null)
+      ? Factory.fromPartial(object.Factory)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllFactoryRequest(): QueryAllFactoryRequest {
+  return { pagination: undefined };
+}
+
+export const QueryAllFactoryRequest = {
+  encode(message: QueryAllFactoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllFactoryRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllFactoryRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllFactoryRequest {
+    return { pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined };
+  },
+
+  toJSON(message: QueryAllFactoryRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllFactoryRequest>, I>>(object: I): QueryAllFactoryRequest {
+    const message = createBaseQueryAllFactoryRequest();
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryAllFactoryResponse(): QueryAllFactoryResponse {
+  return { Factory: [], pagination: undefined };
+}
+
+export const QueryAllFactoryResponse = {
+  encode(message: QueryAllFactoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.Factory) {
+      Factory.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllFactoryResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllFactoryResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.Factory.push(Factory.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllFactoryResponse {
+    return {
+      Factory: Array.isArray(object?.Factory) ? object.Factory.map((e: any) => Factory.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllFactoryResponse): unknown {
+    const obj: any = {};
+    if (message.Factory) {
+      obj.Factory = message.Factory.map((e) => e ? Factory.toJSON(e) : undefined);
+    } else {
+      obj.Factory = [];
+    }
+    message.pagination !== undefined
+      && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllFactoryResponse>, I>>(object: I): QueryAllFactoryResponse {
+    const message = createBaseQueryAllFactoryResponse();
+    message.Factory = object.Factory?.map((e) => Factory.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1038,6 +1267,9 @@ export interface Query {
   /** Queries a list of Compliance items. */
   Compliance(request: QueryGetComplianceRequest): Promise<QueryGetComplianceResponse>;
   ComplianceAll(request: QueryAllComplianceRequest): Promise<QueryAllComplianceResponse>;
+  /** Queries a list of Factory items. */
+  Factory(request: QueryGetFactoryRequest): Promise<QueryGetFactoryResponse>;
+  FactoryAll(request: QueryAllFactoryRequest): Promise<QueryAllFactoryResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1053,6 +1285,8 @@ export class QueryClientImpl implements Query {
     this.DomainAll = this.DomainAll.bind(this);
     this.Compliance = this.Compliance.bind(this);
     this.ComplianceAll = this.ComplianceAll.bind(this);
+    this.Factory = this.Factory.bind(this);
+    this.FactoryAll = this.FactoryAll.bind(this);
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
@@ -1106,6 +1340,18 @@ export class QueryClientImpl implements Query {
     const data = QueryAllComplianceRequest.encode(request).finish();
     const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Query", "ComplianceAll", data);
     return promise.then((data) => QueryAllComplianceResponse.decode(new _m0.Reader(data)));
+  }
+
+  Factory(request: QueryGetFactoryRequest): Promise<QueryGetFactoryResponse> {
+    const data = QueryGetFactoryRequest.encode(request).finish();
+    const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Query", "Factory", data);
+    return promise.then((data) => QueryGetFactoryResponse.decode(new _m0.Reader(data)));
+  }
+
+  FactoryAll(request: QueryAllFactoryRequest): Promise<QueryAllFactoryResponse> {
+    const data = QueryAllFactoryRequest.encode(request).finish();
+    const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Query", "FactoryAll", data);
+    return promise.then((data) => QueryAllFactoryResponse.decode(new _m0.Reader(data)));
   }
 }
 

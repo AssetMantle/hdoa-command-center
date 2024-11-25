@@ -7,41 +7,33 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { MsgUpdateCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgCreateGovernance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgCreateCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgUpdateCommerce } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 import { MsgDeleteCommerce } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 import { MsgCreateDomain } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgDeleteDomain } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgCreateGovernance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgUpdateFactory } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgDeleteFactory } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgCreateCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgDeleteCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 import { MsgUpdateGovernance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgDeleteGovernance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgDeleteDomain } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 import { MsgCreateCommerce } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 import { MsgUpdateDomain } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgUpdateCommerce } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
-import { MsgDeleteCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgCreateFactory } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgDeleteGovernance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
+import { MsgUpdateCompliance } from "./types/hdoacommandcenter/hdoacommandcenter/tx";
 
 import { Commerce as typeCommerce} from "./types"
 import { Compliance as typeCompliance} from "./types"
 import { Domain as typeDomain} from "./types"
+import { Factory as typeFactory} from "./types"
 import { Governance as typeGovernance} from "./types"
 import { Params as typeParams} from "./types"
 
-export { MsgUpdateCompliance, MsgCreateGovernance, MsgCreateCompliance, MsgDeleteCommerce, MsgCreateDomain, MsgDeleteDomain, MsgUpdateGovernance, MsgDeleteGovernance, MsgCreateCommerce, MsgUpdateDomain, MsgUpdateCommerce, MsgDeleteCompliance };
+export { MsgUpdateCommerce, MsgDeleteCommerce, MsgCreateDomain, MsgCreateGovernance, MsgUpdateFactory, MsgDeleteFactory, MsgCreateCompliance, MsgDeleteCompliance, MsgUpdateGovernance, MsgDeleteDomain, MsgCreateCommerce, MsgUpdateDomain, MsgCreateFactory, MsgDeleteGovernance, MsgUpdateCompliance };
 
-type sendMsgUpdateComplianceParams = {
-  value: MsgUpdateCompliance,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateGovernanceParams = {
-  value: MsgCreateGovernance,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateComplianceParams = {
-  value: MsgCreateCompliance,
+type sendMsgUpdateCommerceParams = {
+  value: MsgUpdateCommerce,
   fee?: StdFee,
   memo?: string
 };
@@ -58,8 +50,32 @@ type sendMsgCreateDomainParams = {
   memo?: string
 };
 
-type sendMsgDeleteDomainParams = {
-  value: MsgDeleteDomain,
+type sendMsgCreateGovernanceParams = {
+  value: MsgCreateGovernance,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateFactoryParams = {
+  value: MsgUpdateFactory,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteFactoryParams = {
+  value: MsgDeleteFactory,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateComplianceParams = {
+  value: MsgCreateCompliance,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteComplianceParams = {
+  value: MsgDeleteCompliance,
   fee?: StdFee,
   memo?: string
 };
@@ -70,8 +86,8 @@ type sendMsgUpdateGovernanceParams = {
   memo?: string
 };
 
-type sendMsgDeleteGovernanceParams = {
-  value: MsgDeleteGovernance,
+type sendMsgDeleteDomainParams = {
+  value: MsgDeleteDomain,
   fee?: StdFee,
   memo?: string
 };
@@ -88,29 +104,27 @@ type sendMsgUpdateDomainParams = {
   memo?: string
 };
 
-type sendMsgUpdateCommerceParams = {
-  value: MsgUpdateCommerce,
+type sendMsgCreateFactoryParams = {
+  value: MsgCreateFactory,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeleteComplianceParams = {
-  value: MsgDeleteCompliance,
+type sendMsgDeleteGovernanceParams = {
+  value: MsgDeleteGovernance,
   fee?: StdFee,
   memo?: string
 };
 
-
-type msgUpdateComplianceParams = {
+type sendMsgUpdateComplianceParams = {
   value: MsgUpdateCompliance,
+  fee?: StdFee,
+  memo?: string
 };
 
-type msgCreateGovernanceParams = {
-  value: MsgCreateGovernance,
-};
 
-type msgCreateComplianceParams = {
-  value: MsgCreateCompliance,
+type msgUpdateCommerceParams = {
+  value: MsgUpdateCommerce,
 };
 
 type msgDeleteCommerceParams = {
@@ -121,16 +135,32 @@ type msgCreateDomainParams = {
   value: MsgCreateDomain,
 };
 
-type msgDeleteDomainParams = {
-  value: MsgDeleteDomain,
+type msgCreateGovernanceParams = {
+  value: MsgCreateGovernance,
+};
+
+type msgUpdateFactoryParams = {
+  value: MsgUpdateFactory,
+};
+
+type msgDeleteFactoryParams = {
+  value: MsgDeleteFactory,
+};
+
+type msgCreateComplianceParams = {
+  value: MsgCreateCompliance,
+};
+
+type msgDeleteComplianceParams = {
+  value: MsgDeleteCompliance,
 };
 
 type msgUpdateGovernanceParams = {
   value: MsgUpdateGovernance,
 };
 
-type msgDeleteGovernanceParams = {
-  value: MsgDeleteGovernance,
+type msgDeleteDomainParams = {
+  value: MsgDeleteDomain,
 };
 
 type msgCreateCommerceParams = {
@@ -141,12 +171,16 @@ type msgUpdateDomainParams = {
   value: MsgUpdateDomain,
 };
 
-type msgUpdateCommerceParams = {
-  value: MsgUpdateCommerce,
+type msgCreateFactoryParams = {
+  value: MsgCreateFactory,
 };
 
-type msgDeleteComplianceParams = {
-  value: MsgDeleteCompliance,
+type msgDeleteGovernanceParams = {
+  value: MsgDeleteGovernance,
+};
+
+type msgUpdateComplianceParams = {
+  value: MsgUpdateCompliance,
 };
 
 
@@ -179,45 +213,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendMsgUpdateCompliance({ value, fee, memo }: sendMsgUpdateComplianceParams): Promise<DeliverTxResponse> {
+		async sendMsgUpdateCommerce({ value, fee, memo }: sendMsgUpdateCommerceParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateCompliance: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgUpdateCommerce: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgUpdateCompliance({ value: MsgUpdateCompliance.fromPartial(value) })
+				let msg = this.msgUpdateCommerce({ value: MsgUpdateCommerce.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateCompliance: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateGovernance({ value, fee, memo }: sendMsgCreateGovernanceParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateGovernance: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgCreateGovernance({ value: MsgCreateGovernance.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateGovernance: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateCompliance({ value, fee, memo }: sendMsgCreateComplianceParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateCompliance: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgCreateCompliance({ value: MsgCreateCompliance.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateCompliance: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgUpdateCommerce: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -249,17 +255,73 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteDomain({ value, fee, memo }: sendMsgDeleteDomainParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateGovernance({ value, fee, memo }: sendMsgCreateGovernanceParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteDomain: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateGovernance: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgDeleteDomain({ value: MsgDeleteDomain.fromPartial(value) })
+				let msg = this.msgCreateGovernance({ value: MsgCreateGovernance.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteDomain: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateGovernance: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateFactory({ value, fee, memo }: sendMsgUpdateFactoryParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateFactory: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgUpdateFactory({ value: MsgUpdateFactory.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateFactory: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteFactory({ value, fee, memo }: sendMsgDeleteFactoryParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteFactory: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgDeleteFactory({ value: MsgDeleteFactory.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteFactory: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateCompliance({ value, fee, memo }: sendMsgCreateComplianceParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateCompliance: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgCreateCompliance({ value: MsgCreateCompliance.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateCompliance: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteCompliance({ value, fee, memo }: sendMsgDeleteComplianceParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteCompliance: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgDeleteCompliance({ value: MsgDeleteCompliance.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteCompliance: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -277,17 +339,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteGovernance({ value, fee, memo }: sendMsgDeleteGovernanceParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteDomain({ value, fee, memo }: sendMsgDeleteDomainParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteGovernance: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteDomain: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgDeleteGovernance({ value: MsgDeleteGovernance.fromPartial(value) })
+				let msg = this.msgDeleteDomain({ value: MsgDeleteDomain.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteGovernance: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteDomain: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -319,56 +381,54 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgUpdateCommerce({ value, fee, memo }: sendMsgUpdateCommerceParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateFactory({ value, fee, memo }: sendMsgCreateFactoryParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateCommerce: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateFactory: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgUpdateCommerce({ value: MsgUpdateCommerce.fromPartial(value) })
+				let msg = this.msgCreateFactory({ value: MsgCreateFactory.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateCommerce: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateFactory: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeleteCompliance({ value, fee, memo }: sendMsgDeleteComplianceParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteGovernance({ value, fee, memo }: sendMsgDeleteGovernanceParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteCompliance: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteGovernance: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
-				let msg = this.msgDeleteCompliance({ value: MsgDeleteCompliance.fromPartial(value) })
+				let msg = this.msgDeleteGovernance({ value: MsgDeleteGovernance.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteCompliance: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteGovernance: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateCompliance({ value, fee, memo }: sendMsgUpdateComplianceParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateCompliance: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgUpdateCompliance({ value: MsgUpdateCompliance.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateCompliance: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
 		
-		msgUpdateCompliance({ value }: msgUpdateComplianceParams): EncodeObject {
+		msgUpdateCommerce({ value }: msgUpdateCommerceParams): EncodeObject {
 			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgUpdateCompliance", value: MsgUpdateCompliance.fromPartial( value ) }  
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgUpdateCommerce", value: MsgUpdateCommerce.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateCompliance: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateGovernance({ value }: msgCreateGovernanceParams): EncodeObject {
-			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgCreateGovernance", value: MsgCreateGovernance.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateGovernance: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateCompliance({ value }: msgCreateComplianceParams): EncodeObject {
-			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgCreateCompliance", value: MsgCreateCompliance.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateCompliance: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdateCommerce: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -388,11 +448,43 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteDomain({ value }: msgDeleteDomainParams): EncodeObject {
+		msgCreateGovernance({ value }: msgCreateGovernanceParams): EncodeObject {
 			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteDomain", value: MsgDeleteDomain.fromPartial( value ) }  
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgCreateGovernance", value: MsgCreateGovernance.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteDomain: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateGovernance: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateFactory({ value }: msgUpdateFactoryParams): EncodeObject {
+			try {
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgUpdateFactory", value: MsgUpdateFactory.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateFactory: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteFactory({ value }: msgDeleteFactoryParams): EncodeObject {
+			try {
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteFactory", value: MsgDeleteFactory.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteFactory: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateCompliance({ value }: msgCreateComplianceParams): EncodeObject {
+			try {
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgCreateCompliance", value: MsgCreateCompliance.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateCompliance: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteCompliance({ value }: msgDeleteComplianceParams): EncodeObject {
+			try {
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteCompliance", value: MsgDeleteCompliance.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteCompliance: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -404,11 +496,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteGovernance({ value }: msgDeleteGovernanceParams): EncodeObject {
+		msgDeleteDomain({ value }: msgDeleteDomainParams): EncodeObject {
 			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteGovernance", value: MsgDeleteGovernance.fromPartial( value ) }  
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteDomain", value: MsgDeleteDomain.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteGovernance: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteDomain: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -428,19 +520,27 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgUpdateCommerce({ value }: msgUpdateCommerceParams): EncodeObject {
+		msgCreateFactory({ value }: msgCreateFactoryParams): EncodeObject {
 			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgUpdateCommerce", value: MsgUpdateCommerce.fromPartial( value ) }  
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgCreateFactory", value: MsgCreateFactory.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateCommerce: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateFactory: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeleteCompliance({ value }: msgDeleteComplianceParams): EncodeObject {
+		msgDeleteGovernance({ value }: msgDeleteGovernanceParams): EncodeObject {
 			try {
-				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteCompliance", value: MsgDeleteCompliance.fromPartial( value ) }  
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgDeleteGovernance", value: MsgDeleteGovernance.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteCompliance: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteGovernance: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateCompliance({ value }: msgUpdateComplianceParams): EncodeObject {
+			try {
+				return { typeUrl: "/hdoacommandcenter.hdoacommandcenter.MsgUpdateCompliance", value: MsgUpdateCompliance.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateCompliance: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -469,6 +569,7 @@ class SDKModule {
 						Commerce: getStructure(typeCommerce.fromPartial({})),
 						Compliance: getStructure(typeCompliance.fromPartial({})),
 						Domain: getStructure(typeDomain.fromPartial({})),
+						Factory: getStructure(typeFactory.fromPartial({})),
 						Governance: getStructure(typeGovernance.fromPartial({})),
 						Params: getStructure(typeParams.fromPartial({})),
 						

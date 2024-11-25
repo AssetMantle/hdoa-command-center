@@ -20,6 +20,9 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateCompliance{}, "hdoacommandcenter/CreateCompliance", nil)
 	cdc.RegisterConcrete(&MsgUpdateCompliance{}, "hdoacommandcenter/UpdateCompliance", nil)
 	cdc.RegisterConcrete(&MsgDeleteCompliance{}, "hdoacommandcenter/DeleteCompliance", nil)
+	cdc.RegisterConcrete(&MsgCreateFactory{}, "hdoacommandcenter/CreateFactory", nil)
+	cdc.RegisterConcrete(&MsgUpdateFactory{}, "hdoacommandcenter/UpdateFactory", nil)
+	cdc.RegisterConcrete(&MsgDeleteFactory{}, "hdoacommandcenter/DeleteFactory", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -43,6 +46,11 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateCompliance{},
 		&MsgUpdateCompliance{},
 		&MsgDeleteCompliance{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateFactory{},
+		&MsgUpdateFactory{},
+		&MsgDeleteFactory{},
 	)
 	// this line is used by starport scaffolding # 3
 

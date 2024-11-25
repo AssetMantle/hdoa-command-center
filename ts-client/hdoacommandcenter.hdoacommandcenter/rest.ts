@@ -39,6 +39,15 @@ export interface HdoacommandcenterDomain {
   creator?: string;
 }
 
+export interface HdoacommandcenterFactory {
+  /** @format uint64 */
+  id?: string;
+
+  /** @format int32 */
+  mode?: number;
+  creator?: string;
+}
+
 export interface HdoacommandcenterGovernance {
   /** @format uint64 */
   id?: string;
@@ -63,6 +72,11 @@ export interface HdoacommandcenterMsgCreateDomainResponse {
   id?: string;
 }
 
+export interface HdoacommandcenterMsgCreateFactoryResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
 export interface HdoacommandcenterMsgCreateGovernanceResponse {
   /** @format uint64 */
   id?: string;
@@ -74,6 +88,8 @@ export type HdoacommandcenterMsgDeleteComplianceResponse = object;
 
 export type HdoacommandcenterMsgDeleteDomainResponse = object;
 
+export type HdoacommandcenterMsgDeleteFactoryResponse = object;
+
 export type HdoacommandcenterMsgDeleteGovernanceResponse = object;
 
 export type HdoacommandcenterMsgUpdateCommerceResponse = object;
@@ -81,6 +97,8 @@ export type HdoacommandcenterMsgUpdateCommerceResponse = object;
 export type HdoacommandcenterMsgUpdateComplianceResponse = object;
 
 export type HdoacommandcenterMsgUpdateDomainResponse = object;
+
+export type HdoacommandcenterMsgUpdateFactoryResponse = object;
 
 export type HdoacommandcenterMsgUpdateGovernanceResponse = object;
 
@@ -134,6 +152,21 @@ export interface HdoacommandcenterQueryAllDomainResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface HdoacommandcenterQueryAllFactoryResponse {
+  Factory?: HdoacommandcenterFactory[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface HdoacommandcenterQueryAllGovernanceResponse {
   Governance?: HdoacommandcenterGovernance[];
 
@@ -159,6 +192,10 @@ export interface HdoacommandcenterQueryGetComplianceResponse {
 
 export interface HdoacommandcenterQueryGetDomainResponse {
   Domain?: HdoacommandcenterDomain;
+}
+
+export interface HdoacommandcenterQueryGetFactoryResponse {
+  Factory?: HdoacommandcenterFactory;
 }
 
 export interface HdoacommandcenterQueryGetGovernanceResponse {
@@ -499,6 +536,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryDomain = (id: string, params: RequestParams = {}) =>
     this.request<HdoacommandcenterQueryGetDomainResponse, RpcStatus>({
       path: `/hdoa-command-center/hdoacommandcenter/domain/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryFactoryAll
+   * @request GET:/hdoa-command-center/hdoacommandcenter/factory
+   */
+  queryFactoryAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<HdoacommandcenterQueryAllFactoryResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/factory`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryFactory
+   * @summary Queries a list of Factory items.
+   * @request GET:/hdoa-command-center/hdoacommandcenter/factory/{id}
+   */
+  queryFactory = (id: string, params: RequestParams = {}) =>
+    this.request<HdoacommandcenterQueryGetFactoryResponse, RpcStatus>({
+      path: `/hdoa-command-center/hdoacommandcenter/factory/${id}`,
       method: "GET",
       format: "json",
       ...params,

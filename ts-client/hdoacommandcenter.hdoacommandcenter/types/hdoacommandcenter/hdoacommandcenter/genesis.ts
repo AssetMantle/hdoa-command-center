@@ -4,6 +4,7 @@ import _m0 from "protobufjs/minimal";
 import { Commerce } from "./commerce";
 import { Compliance } from "./compliance";
 import { Domain } from "./domain";
+import { Factory } from "./factory";
 import { Governance } from "./governance";
 import { Params } from "./params";
 
@@ -20,6 +21,8 @@ export interface GenesisState {
   domainCount: number;
   complianceList: Compliance[];
   complianceCount: number;
+  factoryList: Factory[];
+  factoryCount: number;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -33,6 +36,8 @@ function createBaseGenesisState(): GenesisState {
     domainCount: 0,
     complianceList: [],
     complianceCount: 0,
+    factoryList: [],
+    factoryCount: 0,
   };
 }
 
@@ -64,6 +69,12 @@ export const GenesisState = {
     }
     if (message.complianceCount !== 0) {
       writer.uint32(72).uint64(message.complianceCount);
+    }
+    for (const v of message.factoryList) {
+      Factory.encode(v!, writer.uint32(82).fork()).ldelim();
+    }
+    if (message.factoryCount !== 0) {
+      writer.uint32(88).uint64(message.factoryCount);
     }
     return writer;
   },
@@ -102,6 +113,12 @@ export const GenesisState = {
         case 9:
           message.complianceCount = longToNumber(reader.uint64() as Long);
           break;
+        case 10:
+          message.factoryList.push(Factory.decode(reader, reader.uint32()));
+          break;
+        case 11:
+          message.factoryCount = longToNumber(reader.uint64() as Long);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -127,6 +144,8 @@ export const GenesisState = {
         ? object.complianceList.map((e: any) => Compliance.fromJSON(e))
         : [],
       complianceCount: isSet(object.complianceCount) ? Number(object.complianceCount) : 0,
+      factoryList: Array.isArray(object?.factoryList) ? object.factoryList.map((e: any) => Factory.fromJSON(e)) : [],
+      factoryCount: isSet(object.factoryCount) ? Number(object.factoryCount) : 0,
     };
   },
 
@@ -157,6 +176,12 @@ export const GenesisState = {
       obj.complianceList = [];
     }
     message.complianceCount !== undefined && (obj.complianceCount = Math.round(message.complianceCount));
+    if (message.factoryList) {
+      obj.factoryList = message.factoryList.map((e) => e ? Factory.toJSON(e) : undefined);
+    } else {
+      obj.factoryList = [];
+    }
+    message.factoryCount !== undefined && (obj.factoryCount = Math.round(message.factoryCount));
     return obj;
   },
 
@@ -173,6 +198,8 @@ export const GenesisState = {
     message.domainCount = object.domainCount ?? 0;
     message.complianceList = object.complianceList?.map((e) => Compliance.fromPartial(e)) || [];
     message.complianceCount = object.complianceCount ?? 0;
+    message.factoryList = object.factoryList?.map((e) => Factory.fromPartial(e)) || [];
+    message.factoryCount = object.factoryCount ?? 0;
     return message;
   },
 };

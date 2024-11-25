@@ -14,6 +14,7 @@ func DefaultGenesis() *GenesisState {
 		GovernanceList: []Governance{},
 		DomainList:     []Domain{},
 		ComplianceList: []Compliance{},
+		FactoryList:    []Factory{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -69,6 +70,18 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("compliance id should be lower or equal than the last id")
 		}
 		complianceIdMap[elem.Id] = true
+	}
+	// Check for duplicated ID in factory
+	factoryIdMap := make(map[uint64]bool)
+	factoryCount := gs.GetFactoryCount()
+	for _, elem := range gs.FactoryList {
+		if _, ok := factoryIdMap[elem.Id]; ok {
+			return fmt.Errorf("duplicated id for factory")
+		}
+		if elem.Id >= factoryCount {
+			return fmt.Errorf("factory id should be lower or equal than the last id")
+		}
+		factoryIdMap[elem.Id] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

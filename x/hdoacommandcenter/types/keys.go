@@ -37,3 +37,8 @@ const (
 	ComplianceKey      = "Compliance/value/"
 	ComplianceCountKey = "Compliance/count/"
 )
+
+const (
+	FactoryKey      = "Factory/value/"
+	FactoryCountKey = "Factory/count/"
+)

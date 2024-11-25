@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // icon-import
 import { FaHandHoldingUsd, FaStethoscope, FaUserShield, FaUserTie } from "react-icons/fa";
@@ -16,14 +16,12 @@ import useHdoacommandcenterHdoacommandcenter from "../hooks/useHdoacommandcenter
 import { hookOptions, perPage } from "../utils/library";
 
 export default function Dashboard() {
-  const [Left, setLeft] = useState("");
-  const [Right, setRight] = useState("");
   const lcaClient = useClient();
 
   const creatorAddressObject = useAddressContext();
 
   const { resetState: latestIndexes } = useResetState();
-  const { QueryDomainAll, QueryCommerceAll, QueryComplianceAll, QueryGovernanceAll } =
+  const { QueryDomainAll, QueryCommerceAll, QueryComplianceAll, QueryGovernanceAll, QueryFactoryAll } =
     useHdoacommandcenterHdoacommandcenter();
   // DOMAIN VALUES
   const domainAll = QueryDomainAll(
@@ -79,6 +77,17 @@ export default function Dashboard() {
     dataSecCompliance: complianceLatestValue?.dataSecCompliance || false,
     govOversight: complianceLatestValue?.govOversight || false,
     hipaaOversight: complianceLatestValue?.hipaaOversight || false,
+  };
+  // FACTORY MODE VALUES
+  const factoryModeAll = QueryFactoryAll(
+    { "pagination.limit": 100, "pagination.offset": 0, "pagination.count_total": true, "pagination.reverse": false },
+    hookOptions,
+    perPage,
+  );
+  const factoryModeLatestIndex = isNaN(Number(latestIndexes[2])) ? 0 : Number(latestIndexes[2]);
+  const factoryModeLatestValue = factoryModeAll?.data?.pages?.[0]?.Factory?.[factoryModeLatestIndex] || {};
+  const factoryModeInitValue = {
+    mode: factoryModeLatestValue?.mode || 0,
   };
 
   const handlePathModelling = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -236,17 +245,35 @@ export default function Dashboard() {
 
   const hipaaJSX = complianceInitValue?.hipaaOversight ? (
     <>
-      <h3 className="text-xl mb-3">HIPAA Compliant: TRUE</h3>
-      <h4 className="text-lg mb-2">HIPAA Cert. ID: HIPAA-CERT-2024-XYZ123</h4>
-      <h4 className="text-lg mb-2">HIPAA Validity: 2028-12-31</h4>
+      <h4 className="text-lg mb-2">HIPAA STATUS:</h4>
+      <br />
+      <p className="text-sm">
+        HIPAA Compliant: <strong>TRUE</strong>
+      </p>
+      <p className="text-sm">
+        HIPAA Cert. ID: <strong>HIPAA-CERT-2024-XYZ123</strong>
+      </p>
+      <p className="text-sm">
+        HIPAA Validity: <strong>2028-12-31</strong>
+      </p>
     </>
   ) : (
     <>
-      <h3 className="text-xl mb-3">HIPAA Compliant: FALSE</h3>
-      <h4 className="text-lg mb-2">HIPAA Cert. ID: -NA-</h4>
-      <h4 className="text-lg mb-2">HIPAA Validity: -NA-</h4>
+      <h4 className="text-lg mb-2">HIPAA STATUS:</h4>
+      <br />
+      <p className="text-sm">
+        HIPAA Compliant: <strong>FALSE</strong>
+      </p>
+      <p className="text-sm">
+        HIPAA Cert. ID: <strong>-NA-</strong>
+      </p>
+      <p className="text-sm">
+        HIPAA Validity: <strong>-NA-</strong>
+      </p>
     </>
   );
+
+  const uniqueVariant = factoryModeInitValue?.mode || 0;
 
   console.log("domainValue: ", domainAll, " domainNewValue: ", domainInitValue, " latestIndexes: ", latestIndexes);
 
@@ -331,7 +358,7 @@ export default function Dashboard() {
           {governanceJSX}
 
           <p className="text-sm mt-2">
-            Access: <strong>{!Left ? "Disabled" : "Enabled"}</strong>
+            Access: <strong>{!commerceInitValue?.access ? "DISABLED" : "ENABLED"}</strong>
           </p>
           <br />
           <br />
@@ -342,15 +369,16 @@ export default function Dashboard() {
           <span className="text-8xl rounded-[50%] border-4 border-black p-4">
             <GiHealthNormal />
           </span>
-          <span className="text-center uppercase font-medium">
-            Healthcare Digitally
-            <br />
-            Owned Asset
+          <span className="text-center font-bold text-4xl">
+            <em>h</em>
+            {`DOA : ${Number(uniqueVariant + 1)}`}
           </span>
         </div>
         <div className="border-0 rounded-2xl p-4 h-full flex-1 resize-none am-bg-translucent-blue flex flex-col justify-center">
           {domainInitValue?.pathModelling ? (
             <>
+              <p className="text-lg">PATHWAY STATUS</p>
+              <br />
               <p className="text-sm">
                 Pathway Model: <strong>P3290</strong>
               </p>
@@ -372,6 +400,8 @@ export default function Dashboard() {
             </>
           ) : (
             <>
+              <p className="text-lg">PATHWAY STATUS</p>
+              <br />
               <p className="text-sm">
                 Pathway Model: <strong>7277</strong>
               </p>
@@ -392,6 +422,20 @@ export default function Dashboard() {
               </p>
             </>
           )}
+          <br />
+          <br />
+          <>
+            <h4 className="text-lg mb-2">FDA STATUS:</h4>
+            <p className="text-sm">
+              FDA Reg: <strong>F667.7729</strong>
+            </p>
+            <p className="text-sm">
+              Approval Date: <strong>2018-7-2</strong>
+            </p>
+            <p className="text-sm">
+              Regulatory Path: <strong>Class II - 510(k)</strong>
+            </p>
+          </>
         </div>
       </div>
 
@@ -502,7 +546,7 @@ export default function Dashboard() {
           <span className="text-4xl rounded-[50%] border-4 border-black p-3">
             <FaUserTie />
           </span>
-          <span className="text-center uppercase font-medium">Gov Oversight</span>
+          <span className="text-center uppercase font-medium">FDA Oversight</span>
         </div>
 
         <div className="w-[min(185px,100%)] icons flex flex-col items-center justify-center gap-1">

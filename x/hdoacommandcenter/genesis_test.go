@@ -50,6 +50,15 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		ComplianceCount: 2,
+		FactoryList: []types.Factory{
+			{
+				Id: 0,
+			},
+			{
+				Id: 1,
+			},
+		},
+		FactoryCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -69,5 +78,7 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.DomainCount, got.DomainCount)
 	require.ElementsMatch(t, genesisState.ComplianceList, got.ComplianceList)
 	require.Equal(t, genesisState.ComplianceCount, got.ComplianceCount)
+	require.ElementsMatch(t, genesisState.FactoryList, got.FactoryList)
+	require.Equal(t, genesisState.FactoryCount, got.FactoryCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

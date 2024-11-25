@@ -130,6 +130,32 @@ export interface MsgDeleteCompliance {
 export interface MsgDeleteComplianceResponse {
 }
 
+export interface MsgCreateFactory {
+  creator: string;
+  mode: number;
+}
+
+export interface MsgCreateFactoryResponse {
+  id: number;
+}
+
+export interface MsgUpdateFactory {
+  creator: string;
+  id: number;
+  mode: number;
+}
+
+export interface MsgUpdateFactoryResponse {
+}
+
+export interface MsgDeleteFactory {
+  creator: string;
+  id: number;
+}
+
+export interface MsgDeleteFactoryResponse {
+}
+
 function createBaseMsgCreateCommerce(): MsgCreateCommerce {
   return { creator: "", fractionalize: false, access: false, sell: false };
 }
@@ -1577,6 +1603,314 @@ export const MsgDeleteComplianceResponse = {
   },
 };
 
+function createBaseMsgCreateFactory(): MsgCreateFactory {
+  return { creator: "", mode: 0 };
+}
+
+export const MsgCreateFactory = {
+  encode(message: MsgCreateFactory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.mode !== 0) {
+      writer.uint32(16).int32(message.mode);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateFactory {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateFactory();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.mode = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateFactory {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      mode: isSet(object.mode) ? Number(object.mode) : 0,
+    };
+  },
+
+  toJSON(message: MsgCreateFactory): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.mode !== undefined && (obj.mode = Math.round(message.mode));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgCreateFactory>, I>>(object: I): MsgCreateFactory {
+    const message = createBaseMsgCreateFactory();
+    message.creator = object.creator ?? "";
+    message.mode = object.mode ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgCreateFactoryResponse(): MsgCreateFactoryResponse {
+  return { id: 0 };
+}
+
+export const MsgCreateFactoryResponse = {
+  encode(message: MsgCreateFactoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateFactoryResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateFactoryResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateFactoryResponse {
+    return { id: isSet(object.id) ? Number(object.id) : 0 };
+  },
+
+  toJSON(message: MsgCreateFactoryResponse): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = Math.round(message.id));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgCreateFactoryResponse>, I>>(object: I): MsgCreateFactoryResponse {
+    const message = createBaseMsgCreateFactoryResponse();
+    message.id = object.id ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgUpdateFactory(): MsgUpdateFactory {
+  return { creator: "", id: 0, mode: 0 };
+}
+
+export const MsgUpdateFactory = {
+  encode(message: MsgUpdateFactory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id);
+    }
+    if (message.mode !== 0) {
+      writer.uint32(24).int32(message.mode);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateFactory {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateFactory();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        case 3:
+          message.mode = reader.int32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateFactory {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
+      mode: isSet(object.mode) ? Number(object.mode) : 0,
+    };
+  },
+
+  toJSON(message: MsgUpdateFactory): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.id !== undefined && (obj.id = Math.round(message.id));
+    message.mode !== undefined && (obj.mode = Math.round(message.mode));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateFactory>, I>>(object: I): MsgUpdateFactory {
+    const message = createBaseMsgUpdateFactory();
+    message.creator = object.creator ?? "";
+    message.id = object.id ?? 0;
+    message.mode = object.mode ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgUpdateFactoryResponse(): MsgUpdateFactoryResponse {
+  return {};
+}
+
+export const MsgUpdateFactoryResponse = {
+  encode(_: MsgUpdateFactoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateFactoryResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateFactoryResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateFactoryResponse {
+    return {};
+  },
+
+  toJSON(_: MsgUpdateFactoryResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateFactoryResponse>, I>>(_: I): MsgUpdateFactoryResponse {
+    const message = createBaseMsgUpdateFactoryResponse();
+    return message;
+  },
+};
+
+function createBaseMsgDeleteFactory(): MsgDeleteFactory {
+  return { creator: "", id: 0 };
+}
+
+export const MsgDeleteFactory = {
+  encode(message: MsgDeleteFactory, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteFactory {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteFactory();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgDeleteFactory {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
+    };
+  },
+
+  toJSON(message: MsgDeleteFactory): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.id !== undefined && (obj.id = Math.round(message.id));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteFactory>, I>>(object: I): MsgDeleteFactory {
+    const message = createBaseMsgDeleteFactory();
+    message.creator = object.creator ?? "";
+    message.id = object.id ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgDeleteFactoryResponse(): MsgDeleteFactoryResponse {
+  return {};
+}
+
+export const MsgDeleteFactoryResponse = {
+  encode(_: MsgDeleteFactoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteFactoryResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteFactoryResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgDeleteFactoryResponse {
+    return {};
+  },
+
+  toJSON(_: MsgDeleteFactoryResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteFactoryResponse>, I>>(_: I): MsgDeleteFactoryResponse {
+    const message = createBaseMsgDeleteFactoryResponse();
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateCommerce(request: MsgCreateCommerce): Promise<MsgCreateCommerceResponse>;
@@ -1591,6 +1925,9 @@ export interface Msg {
   CreateCompliance(request: MsgCreateCompliance): Promise<MsgCreateComplianceResponse>;
   UpdateCompliance(request: MsgUpdateCompliance): Promise<MsgUpdateComplianceResponse>;
   DeleteCompliance(request: MsgDeleteCompliance): Promise<MsgDeleteComplianceResponse>;
+  CreateFactory(request: MsgCreateFactory): Promise<MsgCreateFactoryResponse>;
+  UpdateFactory(request: MsgUpdateFactory): Promise<MsgUpdateFactoryResponse>;
+  DeleteFactory(request: MsgDeleteFactory): Promise<MsgDeleteFactoryResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1609,6 +1946,9 @@ export class MsgClientImpl implements Msg {
     this.CreateCompliance = this.CreateCompliance.bind(this);
     this.UpdateCompliance = this.UpdateCompliance.bind(this);
     this.DeleteCompliance = this.DeleteCompliance.bind(this);
+    this.CreateFactory = this.CreateFactory.bind(this);
+    this.UpdateFactory = this.UpdateFactory.bind(this);
+    this.DeleteFactory = this.DeleteFactory.bind(this);
   }
   CreateCommerce(request: MsgCreateCommerce): Promise<MsgCreateCommerceResponse> {
     const data = MsgCreateCommerce.encode(request).finish();
@@ -1680,6 +2020,24 @@ export class MsgClientImpl implements Msg {
     const data = MsgDeleteCompliance.encode(request).finish();
     const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Msg", "DeleteCompliance", data);
     return promise.then((data) => MsgDeleteComplianceResponse.decode(new _m0.Reader(data)));
+  }
+
+  CreateFactory(request: MsgCreateFactory): Promise<MsgCreateFactoryResponse> {
+    const data = MsgCreateFactory.encode(request).finish();
+    const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Msg", "CreateFactory", data);
+    return promise.then((data) => MsgCreateFactoryResponse.decode(new _m0.Reader(data)));
+  }
+
+  UpdateFactory(request: MsgUpdateFactory): Promise<MsgUpdateFactoryResponse> {
+    const data = MsgUpdateFactory.encode(request).finish();
+    const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Msg", "UpdateFactory", data);
+    return promise.then((data) => MsgUpdateFactoryResponse.decode(new _m0.Reader(data)));
+  }
+
+  DeleteFactory(request: MsgDeleteFactory): Promise<MsgDeleteFactoryResponse> {
+    const data = MsgDeleteFactory.encode(request).finish();
+    const promise = this.rpc.request("hdoacommandcenter.hdoacommandcenter.Msg", "DeleteFactory", data);
+    return promise.then((data) => MsgDeleteFactoryResponse.decode(new _m0.Reader(data)));
   }
 }
 
